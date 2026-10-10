@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>הרצאות העשרה על המוח | יאיר כהאן</title>
-<meta name="description" content="יאיר כהאן מסביר איך המוח שלנו עובד, בשפה פשוטה ומבוססת מחקר. הרצאות העשרה לבתי ספר, מכינות, יחידות צבאיות וארגונים.">
+<title>הרצאות במדעי המוח לארגונים, מכינות ובתי ספר | יאיר כהאן</title>
+<meta name="description" content="הרצאות במדעי המוח עם יאיר כהאן, בשפה פשוטה ומבוססת מחקר. הרצאות העשרה לבתי ספר, מכינות, יחידות צבאיות וארגונים.">
 <link rel="canonical" href="https://yairkahan.github.io/yairkahan/">
 <meta property="og:site_name" content="יאיר כהאן">
-<meta property="og:title" content="יאיר כהאן | הרצאות העשרה על המוח">
+<meta property="og:title" content="יאיר כהאן | הרצאות במדעי המוח">
 <meta property="og:description" content="בואו להבין יותר טוב את המוח שלנו. הרצאות העשרה על המוח לבתי ספר, מכינות, יחידות צבאיות וארגונים, בשפה פשוטה ומבוססת מחקר.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
@@ -29,7 +29,7 @@
 <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
 {"@type":"Person","@id":"https://yairkahan.github.io/yairkahan/#me","name":"יאיר כהאן","alternateName":"Yair Kahan","url":"https://yairkahan.github.io/yairkahan/","image":"https://yairkahan.github.io/yairkahan/og.jpg","jobTitle":"מרצה","alumniOf":{"@type":"CollegeOrUniversity","name":"אוניברסיטת בן גוריון בנגב"},"affiliation":{"@type":"CollegeOrUniversity","name":"האוניברסיטה העברית בירושלים"},"knowsAbout":["מדעי המוח","פסיכולוגיה"],"sameAs":["https://www.instagram.com/yair.kahan/"],"telephone":"+972548360550"},
-{"@type":"Service","name":"הרצאות העשרה על המוח","serviceType":"הרצאת העשרה","provider":{"@id":"https://yairkahan.github.io/yairkahan/#me"},"areaServed":{"@type":"Country","name":"ישראל"},"audience":{"@type":"Audience","audienceType":"בתי ספר, מכינות, יחידות צבאיות וארגונים"},"description":"הרצאות העשרה מבוססות מחקר על איך המוח שלנו עובד. לא טיפול ולא אבחון."}]}</script>
+{"@type":"Service","name":"הרצאות העשרה במדעי המוח","serviceType":"הרצאת העשרה","provider":{"@id":"https://yairkahan.github.io/yairkahan/#me"},"areaServed":{"@type":"Country","name":"ישראל"},"audience":{"@type":"Audience","audienceType":"בתי ספר, מכינות, יחידות צבאיות וארגונים"},"description":"הרצאות העשרה מבוססות מחקר על איך המוח שלנו עובד. לא טיפול ולא אבחון."}]}</script>
 <style>
 /* v8, night rebuild: one line of thought for a busy reader on a phone.
    hero, numbers strip, lectures, about, questions, contact. Bone paper, ink, one brass accent.
@@ -192,6 +192,11 @@ html.still *,html.still *::before,html.still *::after{animation-play-state:pause
 .lc-body h4{font-size:13.5px;font-weight:600;color:var(--brass-ink);margin:0 0 4px}
 .lc-brain p{font-size:16px;color:var(--ink);line-height:1.65}
 .lc-out-h{margin-top:18px!important}
+.lc-ch{margin-top:18px!important}
+.lc-ch + .lc-para{margin-top:0}
+.lc-para + .lc-para{margin-top:10px}
+.lc-clip{margin:18px 0 0;width:min(240px,70%);aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--bg-2)}
+.lc-clip video{width:100%;height:100%;object-fit:cover;display:block}
 .lc-out{margin:0;padding:0;list-style:none;display:grid;gap:2px}
 .lc-out li{position:relative;padding-inline-start:16px;font-size:16px}
 .lc-out li::before{content:"";position:absolute;right:0;top:.72em;width:6px;height:6px;border-radius:50%;border:1.5px solid var(--brass)}
@@ -351,7 +356,7 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
   <div class="bar">
     <a class="brand" href="#top" aria-label="יאיר כהאן, לראש העמוד">
       <svg viewBox="0 0 30 30" aria-hidden="true"><rect class="m-bg" width="30" height="30" rx="9"/><path class="m-ln" d="M8.5 19.5 L19.5 8.5 L21 21 Z"/><circle class="m-dot" cx="8.5" cy="19.5" r="2.7"/><circle class="m-gold" cx="19.5" cy="8.5" r="2.7"/><circle class="m-dot" cx="21" cy="21" r="2.1"/></svg>
-      <span><b>יאיר כהאן</b><small>הרצאות על המוח</small></span>
+      <span><b>יאיר כהאן</b><small>הרצאות במדעי המוח</small></span>
     </a>
     <nav class="menu" aria-label="ניווט">
       <a class="lnk" href="#lectures">הרצאות</a>
@@ -367,7 +372,7 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <h1 class="label">הרצאות לבתי ספר, מכינות, צבא וארגונים</h1>
+      <h1 class="label">הרצאות במדעי המוח לבתי ספר, מכינות, צבא וארגונים</h1>
       <p class="display"><span class="l"><span>בואו להבין</span></span><span class="l"><span>יותר טוב</span></span><span class="l"><span><em>את המוח שלנו<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 13 C60 5 120 4 170 8 C210 11 250 14 296 7"/></svg></em></span></span></p>
       <p class="sub">אני יאיר כהאן, בוגר תואר ראשון במדעי המוח, סטודנט לתואר שני בנוירופסיכולוגיה באוניברסיטה העברית וסרן במילואים. בהרצאות אני מסביר איך המוח עובד, במילים פשוטות ולפי המחקר.</p>
       <div class="ctas">
@@ -418,8 +423,10 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
           <span class="lc-more"><i aria-hidden="true"></i><span class="o">פרטים</span><span class="c">סגירה</span></span>
         </button></h3>
         <div class="lc-body" id="lec-screens-body" hidden>
+          <h4 class="lc-ch">האתגר</h4>
+          <p class="lc-para">אתם רואים עייפות וקושי להתרכז, ורוצים להבין מה המסכים קשורים לזה.</p>
           <p class="lc-para">ההרצאה מראה למשתתפים איך התבגרות לצד המסכים יכולה להשפיע על ההתפתחות שלהם, איך אפשר להפוך את המסכים ליתרון, ומה הסכנות כשנשאבים אליהם.</p>
-          <div class="lc-brain"><h4>מה קורה במוח</h4><p>אצל בני נוער, החלק במוח שרוצה עוד מגיב חזק ללייקים. מוח עייף מגיב חזק יותר לרגשות.</p></div>
+          <div class="lc-brain"><h4>מה קורה במוח</h4><p>אצל בני נוער, החלק במוח שרוצה עוד כבר פועל בכל הכוח, והבלמים עדיין נבנים. כך אפשר להבין למה קשה להניח את הטלפון, בלי להאשים אף אחד.</p></div>
           <h4 class="lc-out-h">יוצאים עם</h4>
           <ul class="lc-out"><li>איך הופכים את המסכים ליתרון</li><li>ממה כדאי להיזהר, ולמה</li></ul>
           <p class="lc-fmt">אפשר להוסיף מפגש נפרד להורים.</p>
@@ -438,8 +445,9 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
           <span class="lc-more"><i aria-hidden="true"></i><span class="o">פרטים</span><span class="c">סגירה</span></span>
         </button></h3>
         <div class="lc-body" id="lec-perf-body" hidden>
+          <h4 class="lc-ch">האתגר</h4>
           <p class="lc-para">אתם רואים אנשים טובים שנתקעים על פרטים קטנים, ומסתירים טעויות.</p>
-          <div class="lc-brain"><h4>מה קורה במוח</h4><p>המוח מסמן טעות מהר מאוד, ואצל מי שנוטה לדאוג זו אזעקה רגישה מדי. מחקרים מצאו קשר בין פחד מטעויות לשחיקה, ועוד לא ברור מה גורם למה.</p></div>
+          <div class="lc-brain"><h4>מה קורה במוח</h4><p>המוח מסמן טעות מהר מאוד, ואצל מי שנוטה לדאוג זו אזעקה רגישה מדי. כשהיא מצלצלת על כל טעות קטנה, נשארים פחות כוחות לפתור את הבעיה. מחקרים מצאו קשר בין פחד מטעויות לשחיקה, ועוד לא ברור מה גורם למה.</p></div>
           <h4 class="lc-out-h">יוצאים עם</h4>
           <ul class="lc-out"><li>איך מבדילים בין סטנדרט גבוה לפחד מטעות</li><li>רעיונות לצוות שרוצה ללמוד מטעויות בלי להסתיר אותן</li></ul>
           <p class="lc-fmt">אפשר גם כהרצאת צהריים של 45 דקות. אף אחד לא מתבקש לשתף.</p>
@@ -457,6 +465,8 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
           <span class="lc-more"><i aria-hidden="true"></i><span class="o">פרטים</span><span class="c">סגירה</span></span>
         </button></h3>
         <div class="lc-body" id="lec-service-body" hidden>
+          <h4 class="lc-ch">האתגר</h4>
+          <p class="lc-para">אתם רוצים שהצעירים שלכם יבחרו בשירות משמעותי, ויבינו מה הם מרוויחים ממנו.</p>
           <p class="lc-para">ההרצאה עוזרת למשתתפים לראות איך לקיחת אחריות ואתגר אישי בזמן השירות יכולים לפתח את המוח שלהם, ואילו יתרונות זה נותן להם.</p>
           <div class="lc-brain"><h4>מה קורה במוח</h4><p>המוח הצעיר עדיין נבנה, והוא מתפתח לפי מה שמתרגלים. אחריות ואתגר הם אימון בשבילו.</p></div>
           <h4 class="lc-out-h">יוצאים עם</h4>
@@ -476,8 +486,9 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
           <span class="lc-more"><i aria-hidden="true"></i><span class="o">פרטים</span><span class="c">סגירה</span></span>
         </button></h3>
         <div class="lc-body" id="lec-expect-body" hidden>
+          <h4 class="lc-ch">האתגר</h4>
           <p class="lc-para">אתם רואים איך שינויים ואכזבות מורידים את המוטיבציה, ורוצים להבין למה.</p>
-          <div class="lc-brain"><h4>מה קורה במוח</h4><p>המוח מנסה כל הזמן לנחש מה יקבל. כשהמציאות מפתיעה אותו, הוא מעדכן את הציפיות לפעם הבאה. זה בדיוק מה שאני חוקר במעבדה.</p></div>
+          <div class="lc-brain"><h4>מה קורה במוח</h4><p>המוח מנסה כל הזמן לנחש מה יקבל. כשהמציאות מפתיעה אותו, הוא מעדכן את הציפיות לפעם הבאה. כך אפשר להבין ירידה במוטיבציה אחרי אכזבה, בלי לקרוא לה עצלות. זה בדיוק מה שאני חוקר במעבדה.</p></div>
           <h4 class="lc-out-h">יוצאים עם</h4>
           <ul class="lc-out"><li>איך המוח בונה ציפיות ומתעדכן</li><li>הבנה של מה אכזבה עושה למוטיבציה</li></ul>
           <p class="lc-fmt">הרצאה אחת או סדרה לאותה קבוצה. אף אחד לא מתבקש לשתף.</p>

@@ -216,6 +216,7 @@ html.still *,html.still *::before,html.still *::after{animation-play-state:pause
 /* about */
 .about{padding:clamp(72px,10vw,140px) 0}
 .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px);align-items:center}
+.about-grid.solo-txt{grid-template-columns:1fr}
 .about-ph{position:relative;padding-bottom:18%;margin:0}
 .about-ph .main{width:84%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:26px}
 .about-ph .inset{position:absolute;left:0;bottom:0;width:38%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;border:6px solid var(--bg);box-shadow:0 24px 50px -30px var(--shadow)}
@@ -388,7 +389,6 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
   <div class="wrap">
     <div class="proof-frame">
       <img src="assets/p-band-base.webp" alt="תמונה שנוצרה בבינה מלאכותית. יאיר כהאן מרצה לקבוצת חיילים." loading="lazy" width="2000" height="1328">
-      <span class="illus">תמונה להמחשה</span>
       <div class="nums">
         <p class="num"><b>20+</b><span>הרצאות</span></p>
         <p class="num"><b>500+</b><span>משתתפים</span></p>
@@ -522,10 +522,7 @@ footer{background:var(--night);color:var(--on-night-2);padding:clamp(40px,5vw,64
 </section>
 
 <section class="about" id="about" aria-labelledby="about-h">
-  <div class="wrap about-grid">
-    <figure class="about-ph solo">
-      <img class="main" src="assets/p-about3.webp" alt="יאיר כהאן" loading="lazy" width="960" height="1200">
-    </figure>
+  <div class="wrap about-grid solo-txt">
     <div class="about-txt">
       <h2 id="about-h">נעים להכיר, אני יאיר</h2>
       <p>אני בוגר תואר ראשון במדעי המוח. ביומיום אני חוקר במעבדה איך המוח מעדכן ציפיות, ובמילואים אני קצין קרבי.</p>

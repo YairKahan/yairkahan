@@ -27,7 +27,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
-<link rel="preload" as="image" href="assets/brain.webp">
 <script>try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
 {"@type":"Person","@id":"https://yairkahan.github.io/yairkahan/#me","name":"יאיר כהאן","alternateName":"Yair Kahan","url":"https://yairkahan.github.io/yairkahan/","image":"https://yairkahan.github.io/yairkahan/og.jpg","jobTitle":"מרצה","alumniOf":{"@type":"CollegeOrUniversity","name":"אוניברסיטת בן גוריון בנגב"},"affiliation":{"@type":"CollegeOrUniversity","name":"האוניברסיטה העברית בירושלים"},"knowsAbout":["מדעי המוח","פסיכולוגיה"],"sameAs":["https://www.instagram.com/yair.kahan/"],"telephone":"+972548360550"},
@@ -84,11 +83,7 @@ html[data-theme="dark"] .icon-btn .moon,html[data-theme="light"] .icon-btn .sun{
 #net{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:170px;background:linear-gradient(transparent,var(--bg));z-index:1;pointer-events:none}
 .hero .wrap{--g:clamp(24px,5vw,70px);--bl:min(70px,max(12px,calc(50vw - 572px)));position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:var(--g);align-items:center}
-.hero .wrap>div:not(.hero-brain),.hero .lens{position:relative;z-index:1}
-.hero-brain{position:absolute;z-index:0;left:calc(-1*var(--bl));top:-30px;width:calc(.425*(100% - var(--g)) + var(--g) + var(--bl) - 36px);pointer-events:none}
-.hero-brain i{display:block;aspect-ratio:960/850;background:color-mix(in srgb,var(--sig) 82%,var(--ink));animation:bfade 2.6s var(--ease) both;
-  -webkit-mask:url(assets/brain.webp) center/contain no-repeat;mask:url(assets/brain.webp) center/contain no-repeat}
-@keyframes bfade{from{opacity:0;filter:blur(8px);transform:scale(1.03)}to{opacity:1;filter:none;transform:none}}
+.hero .wrap>div,.hero .lens{position:relative;z-index:1}
 .kicker{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:400;color:var(--ink2);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg) 60%,transparent)}
 .kicker i{width:8px;height:8px;border-radius:50%;background:var(--sig);flex:none}
 .display{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7.4vw,104px);line-height:1;letter-spacing:-.02em;margin:22px 0 32px}
@@ -104,7 +99,7 @@ html[data-theme="dark"] .icon-btn .moon,html[data-theme="light"] .icon-btn .sun{
 @keyframes bdraw{to{stroke-dashoffset:0}}
 .sub{font-size:clamp(17px,1.5vw,20px);color:var(--ink2);max-width:34em}
 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.lens{position:relative;justify-self:end;width:min(236px,100%);margin-top:310px;aspect-ratio:4/5;border-radius:28px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 30px 60px -34px rgba(31,42,46,.45),0 0 0 8px var(--soft);margin:0}
+.lens{position:relative;justify-self:center;width:min(360px,100%);aspect-ratio:4/5;border-radius:28px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 30px 60px -34px rgba(31,42,46,.45),0 0 0 8px var(--soft);margin:0}
 .lens video{width:100%;height:100%;object-fit:cover}
 .lens::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.55));z-index:1;pointer-events:none}
 .scan{position:absolute;inset:0 0 auto 0;height:30%;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--sig) 24%,transparent),transparent);display:none}
@@ -288,9 +283,6 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
 @media(max-width:900px){
   .hero .wrap{grid-template-columns:1fr}
   .lens{width:min(300px,78%);margin-top:0;justify-self:center}
-  .hero-brain{position:relative;left:auto;top:auto;width:clamp(184px,32vw,260px);margin:0 auto -6px}
-  .hero{padding-top:100px}
-  .display{margin:14px 0 26px}
   .match-box,.about-g,.contact-g{grid-template-columns:1fr}
 }
 @media(max-width:820px){
@@ -339,7 +331,6 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
 <section class="hero" id="hero" style="padding-bottom:110px">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="hero-brain" aria-hidden="true"><i></i></div>
     <div>
       <h1 class="kicker"><i aria-hidden="true"></i>הרצאות במדעי המוח לבתי ספר, מכינות, צבא וארגונים</h1>
       <p class="display"><span class="l"><span>בואו להבין</span></span><span class="l"><span>יותר טוב</span></span><span class="l"><span><em>את המוח שלנו<svg class="uline" viewBox="0 0 300 10" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M298 5 C 220 2.5, 120 2.5, 2 6.5"/></svg></em></span></span></p>
@@ -657,7 +648,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
   <div class="wrap">
     <p><b>הרצאות העשרה שמבוססות על מחקר, בלי אבחון ובלי ייעוץ.</b> במצוקה אפשר לפנות לער״ן בטלפון <a href="tel:1201">1201</a>, שעונה בכל שעה. אחרי אירוע ביטחוני אפשר לפנות גם לנט״ל בטלפון <a href="tel:1800363363"><bdi>1 800 363 363</bdi></a>. בסכנה מיידית חייגו <a href="tel:101">101</a> או <a href="tel:100">100</a>. הוואטסאפ באתר מיועד לתיאום הרצאות בלבד.</p>
     <nav aria-label="קישורים"><a href="#lectures">הרצאות</a><a href="#about">עליי</a><a href="#faq">שאלות</a><a href="https://www.instagram.com/yair.kahan/" target="_blank" rel="noopener">אינסטגרם</a></nav>
-    <div class="f-bot"><span>© 2026 יאיר כהאן</span><span>הסרטון בראש העמוד אמיתי. איור המוח נוצר בבינה מלאכותית.</span></div>
+    <div class="f-bot"><span>© 2026 יאיר כהאן</span><span>הסרטון בראש העמוד אמיתי.</span></div>
   </div>
 </footer>
 

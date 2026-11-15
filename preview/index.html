@@ -314,9 +314,21 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
 .lec{position:relative;transition:border-color .3s,opacity .4s,transform .5s var(--ease),box-shadow .5s var(--ease)}   /* relative: the reveal circle starts from the button inside the card */
 @media (hover:hover){.lec:not(.open):hover{transform:translateY(-3px);box-shadow:0 20px 44px -22px rgba(59,125,181,.45)}}
 html[data-theme="dark"] .lmedia video,html[data-theme="dark"] .lmedia img{opacity:.86}
+.lec.quiet .lmedia{aspect-ratio:4/1;border-radius:calc(var(--r) - 1px) calc(var(--r) - 1px) 0 0}
+.lec.quiet .lmedia::after{background:linear-gradient(180deg,transparent,var(--bg))}
+@media (max-width:640px){.lec.quiet .lmedia{aspect-ratio:12/5}}
+.hamb{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.85;background:#FAF7F6 url(../assets/hero-amb.jpg) center/cover no-repeat}
+.hamb video{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 1.2s}
+.hamb video.on{opacity:1}
+@media (max-width:700px){.hamb{background-image:url(../assets/hero-amb-m.jpg)}}
+html[data-theme="dark"] .hamb{opacity:.06}
+/* ---------- about: research visual ---------- */
+.amedia{position:relative;margin:0 0 12px;aspect-ratio:2/1;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#FAF7F6}
+.amedia video,.amedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+html[data-theme="dark"] .amedia video{opacity:.86}
 /* ---------- contact: light drifting like water ---------- */
 #contact{overflow:hidden}
-.caust{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9;-webkit-mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent);mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent)}
+.caust{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6;-webkit-mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent);mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent)}
 .caust video,.caust img{width:100%;height:100%;object-fit:cover;display:block}
 #contact .wrap{position:relative;z-index:1}
 html[data-theme="dark"] .caust{opacity:.1}
@@ -351,6 +363,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
 
 <main id="top">
 <section class="hero" id="hero" style="padding-bottom:110px">
+  <div class="hamb" aria-hidden="true"><video muted loop playsinline preload="none" data-src="../assets/hero-amb.mp4" data-src-m="../assets/hero-amb-m.mp4"></video></div>
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
@@ -400,10 +413,32 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     <p class="lead rv">כל הרצאה נמשכת 45&nbsp;עד&nbsp;90 דקות.</p>
     <div class="lecs">
 
-      <article class="lec rv" id="lec-screens" data-i="1" data-aud="school mechina unit" data-title="מסכים והמוח המתבגר: בין התפתחות לניוון" data-need="עייפות וקושי להתרכז, ורוצים להבין מה המסכים קשורים לזה">
+            <article class="lec rv" id="lec-parents" data-i="1" data-aud="school" data-title="להורים: המוח המתבגר בעידן המסכים וה AI" data-need="הילדים לא עוזבים את המסך, ורוצים להבין מה קורה להם במוח">
+        <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="../assets/lec-parents.jpg" data-src="../assets/lec-parents.mp4"></video></div>
+        <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-parents-b">
+          <span class="ix" aria-hidden="true">01</span>
+          <span><span class="tagl">הורים · ועדי הורים <span class="fit">מתאים לכם</span></span><span class="ttl">להורים: המוח המתבגר בעידן המסכים וה AI</span><span class="hook">מה שהמחקר יודע ורוב ההורים עדיין לא</span></span>
+          <span class="pm" aria-hidden="true">+</span>
+        </button></h3>
+        <div class="body" id="lec-parents-b" hidden>
+          <div>
+            <h4 class="k">על מה מדברים</h4>
+            <ul><li><b>למה הם לא עוזבים את המסך:</b> המפגש בין מוח מתבגר לסרטונים, לייקים ושייכות חברתית.</li><li><b>AI כמורה, לא כקיצור דרך:</b> איך משתמשים בצ'אט כדי לפתח חשיבה, לא להחליף אותה.</li><li><b>מצפייה ליצירה:</b> מה אם הטלפון של הילד שלכם יכול להיות הכלי שבו הוא בונה, לומד ויוצר?</li></ul>
+            <div class="brain"><h4 class="k">מה קורה במוח</h4><p>אצל בני נוער, החלק במוח שרוצה עוד כבר פועל בכל הכוח, והבלמים עדיין נבנים.</p></div>
+            <p class="fmt">מתאים לערב הורים או למפגש של ועד ההורים.</p>
+            <a class="btn btn-sig btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%20%28%D7%91%D7%99%D7%AA%20%D7%A1%D7%A4%D7%A8%20%D7%90%D7%95%20%D7%95%D7%A2%D7%93%20%D7%94%D7%95%D7%A8%D7%99%D7%9D%29%0A%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%99%D7%9D%20%D7%91%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%9C%D7%94%D7%95%D7%A8%D7%99%D7%9D%3A%20%D7%94%D7%9E%D7%95%D7%97%20%D7%94%D7%9E%D7%AA%D7%91%D7%92%D7%A8%20%D7%91%D7%A2%D7%99%D7%93%D7%9F%20%D7%94%D7%9E%D7%A1%D7%9B%D7%99%D7%9D%20%D7%95%D7%94%20AI%22%0A%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20%D7%9B...%20%D7%94%D7%95%D7%A8%D7%99%D7%9D%0A%D7%9E%D7%94%20%D7%94%D7%99%D7%99%D7%A0%D7%95%20%D7%A8%D7%95%D7%A6%D7%99%D7%9D%20%D7%A9%D7%99%D7%99%D7%A9%D7%90%D7%A8%20%D7%9C%D7%94%D7%9D%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לבדוק תאריך בוואטסאפ</a>
+          </div>
+          <div class="viz" aria-hidden="true">
+            <div class="vbar go1"><span>רוצה עוד</span><i></i></div>
+            <div class="vbar go2"><span>בלמים</span><i></i></div>
+          </div>
+        </div>
+      </article>
+
+<article class="lec rv" id="lec-screens" data-i="2" data-aud="school mechina unit" data-title="מסכים והמוח המתבגר: בין התפתחות לניוון" data-need="עייפות וקושי להתרכז, ורוצים להבין מה המסכים קשורים לזה">
         <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="../assets/lec-screens.jpg" data-src="../assets/lec-screens.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-screens-b">
-          <span class="ix" aria-hidden="true">01</span>
+          <span class="ix" aria-hidden="true">02</span>
           <span><span class="tagl">בתי ספר · מכינות · צבא <span class="fit">מתאים לכם</span></span><span class="ttl">מסכים והמוח המתבגר: בין התפתחות לניוון</span><span class="hook">איך ההתבגרות לצד מסכים משפיעה על הדור הצעיר, והאם אפשר לרתום את הטכנולוגיה לטובתנו?</span></span>
           <span class="pm" aria-hidden="true">+</span>
         </button></h3>
@@ -416,7 +451,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
             <h4 class="k">יוצאים עם</h4>
             <ul><li>איך ניתן להפוך את הטכנולוגיה לייתרון </li><li>איך השאבות למסכים עשויה לפגוע בנו</li></ul>
             <p class="fmt">אפשר להוסיף מפגש נפרד להורים.</p>
-            <a class="btn btn-sig btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%20%28%D7%91%D7%99%D7%AA%20%D7%A1%D7%A4%D7%A8%2C%20%D7%9E%D7%9B%D7%99%D7%A0%D7%94%20%D7%90%D7%95%20%D7%99%D7%97%D7%99%D7%93%D7%94%29%0A%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%99%D7%9D%20%D7%91%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%98%D7%9C%D7%A4%D7%95%D7%A0%D7%99%D7%9D%20%D7%95%D7%94%D7%9E%D7%95%D7%97%20%D7%94%D7%9E%D7%AA%D7%91%D7%92%D7%A8%3A%20%D7%9E%D7%94%20%D7%90%D7%A4%D7%A9%D7%A8%20%D7%9C%D7%A2%D7%A9%D7%95%D7%AA%22%0A%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%20%D7%91%D7%92%D7%99%D7%9C%20...%0A%D7%9E%D7%94%20%D7%94%D7%99%D7%99%D7%A0%D7%95%20%D7%A8%D7%95%D7%A6%D7%99%D7%9D%20%D7%A9%D7%99%D7%99%D7%A9%D7%90%D7%A8%20%D7%9C%D7%94%D7%9D%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לבדוק תאריך בוואטסאפ</a>
+            <a class="btn btn-sig btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%20%28%D7%91%D7%99%D7%AA%20%D7%A1%D7%A4%D7%A8%2C%20%D7%9E%D7%9B%D7%99%D7%A0%D7%94%20%D7%90%D7%95%20%D7%99%D7%97%D7%99%D7%93%D7%94%29%0A%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%99%D7%9D%20%D7%91%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%9E%D7%A1%D7%9B%D7%99%D7%9D%20%D7%95%D7%94%D7%9E%D7%95%D7%97%20%D7%94%D7%9E%D7%AA%D7%91%D7%92%D7%A8%3A%20%D7%91%D7%99%D7%9F%20%D7%94%D7%AA%D7%A4%D7%AA%D7%97%D7%95%D7%AA%20%D7%9C%D7%A0%D7%99%D7%95%D7%95%D7%9F%22%0A%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%20%D7%91%D7%92%D7%99%D7%9C%20...%0A%D7%9E%D7%94%20%D7%94%D7%99%D7%99%D7%A0%D7%95%20%D7%A8%D7%95%D7%A6%D7%99%D7%9D%20%D7%A9%D7%99%D7%99%D7%A9%D7%90%D7%A8%20%D7%9C%D7%94%D7%9D%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לבדוק תאריך בוואטסאפ</a>
           </div>
           <div class="viz" aria-hidden="true">
             <div class="vbar go1"><span>רוצה עוד</span><i></i></div>
@@ -425,10 +460,10 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         </div>
       </article>
 
-      <article class="lec rv" id="lec-perf" data-i="2" data-aud="org" data-title="פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה" data-need="אנשים טובים שנתקעים על פרטים קטנים, ומסתירים טעויות">
+      <article class="lec rv" id="lec-perf" data-i="3" data-aud="org" data-title="פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה" data-need="אנשים טובים שנתקעים על פרטים קטנים, ומסתירים טעויות">
         <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="../assets/lec-perf.jpg" data-src="../assets/lec-perf.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-perf-b">
-          <span class="ix" aria-hidden="true">02</span>
+          <span class="ix" aria-hidden="true">03</span>
           <span><span class="tagl">ארגונים <span class="fit">מתאים לכם</span></span><span class="ttl">פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה</span><span class="hook">למה מייל של שתי שורות לוקח שעה?</span></span>
           <span class="pm" aria-hidden="true">+</span>
         </button></h3>
@@ -449,32 +484,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         </div>
       </article>
 
-      <article class="lec rv" id="lec-service" data-i="3" data-aud="school mechina unit" data-title="איך שירות צבאי משמעותי יכול לפתח אותנו" data-need="שהצעירים שלנו יבחרו בשירות משמעותי, ויבינו מה הם מרוויחים ממנו">
-        <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="../assets/lec-service.jpg" data-src="../assets/lec-service.mp4"></video></div>
-        <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-service-b">
-          <span class="ix" aria-hidden="true">03</span>
-          <span><span class="tagl">בתי ספר · מכינות · צבא <span class="fit">מתאים לכם</span></span><span class="ttl">איך שירות צבאי משמעותי יכול לפתח אותנו</span><span class="hook">מה קורה במוח כשלוקחים אחריות ומאתגרים את עצמנו?</span></span>
-          <span class="pm" aria-hidden="true">+</span>
-        </button></h3>
-        <div class="body" id="lec-service-b" hidden>
-          <div>
-            <h4 class="k">האתגר</h4>
-            <p>אתם רוצים שהצעירים שלכם יבחרו בשירות משמעותי, ויבינו מה הם מרוויחים ממנו.</p>
-            <p>ההרצאה עוזרת למשתתפים לראות איך לקיחת אחריות ואתגר אישי בזמן השירות יכולים לפתח את המוח שלהם, ואילו יתרונות זה נותן להם.</p>
-            <div class="brain"><h4 class="k">מה קורה במוח</h4><p>המוח הצעיר עדיין נבנה, והוא מתפתח לפי מה שמתרגלים. אחריות ואתגר הם אימון בשבילו.</p></div>
-            <h4 class="k">יוצאים עם</h4>
-            <ul><li>איך אחריות ואתגר מפתחים את המוח</li><li>אילו יתרונות אפשר לקחת מהשירות להמשך</li></ul>
-            <p class="fmt">לשכבה, למחזור או לפלוגה. את הדוגמאות אני מביא מהניסיון שלי כקצין, וסיפורים של החיילים שלי נשארים אצלי.</p>
-            <a class="btn btn-sig btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%20%28%D7%91%D7%99%D7%AA%20%D7%A1%D7%A4%D7%A8%2C%20%D7%9E%D7%9B%D7%99%D7%A0%D7%94%20%D7%90%D7%95%20%D7%99%D7%97%D7%99%D7%93%D7%94%29%0A%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%99%D7%9D%20%D7%91%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%90%D7%99%D7%9A%20%D7%A9%D7%99%D7%A8%D7%95%D7%AA%20%D7%A6%D7%91%D7%90%D7%99%20%D7%9E%D7%A9%D7%9E%D7%A2%D7%95%D7%AA%D7%99%20%D7%99%D7%9B%D7%95%D7%9C%20%D7%9C%D7%A4%D7%AA%D7%97%20%D7%90%D7%95%D7%AA%D7%A0%D7%95%22%0A%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%20%D7%91%D7%92%D7%99%D7%9C%20...%0A%D7%9E%D7%94%20%D7%94%D7%99%D7%99%D7%A0%D7%95%20%D7%A8%D7%95%D7%A6%D7%99%D7%9D%20%D7%A9%D7%99%D7%99%D7%A9%D7%90%D7%A8%20%D7%9C%D7%94%D7%9D%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לבדוק תאריך בוואטסאפ</a>
-          </div>
-          <div class="viz" aria-hidden="true">
-            <svg class="netv" viewBox="0 0 260 100"><line x1="30" y1="50" x2="95" y2="22"/><line x1="30" y1="50" x2="95" y2="78"/><line x1="95" y1="22" x2="165" y2="50"/><line x1="95" y1="78" x2="165" y2="50"/><line x1="165" y1="50" x2="230" y2="30"/><line x1="165" y1="50" x2="230" y2="72"/><circle cx="30" cy="50" r="6"/><circle cx="95" cy="22" r="6"/><circle cx="95" cy="78" r="6"/><circle cx="165" cy="50" r="6"/><circle cx="230" cy="30" r="6"/><circle cx="230" cy="72" r="6"/></svg>
-            <span class="cap">מה שמתרגלים מתחזק</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="lec rv" id="lec-expect" data-i="4" data-aud="unit mechina org" data-title="ציפיות ואכזבות: איך המוח מתעדכן" data-need="שינויים ואכזבות שמורידים את המוטיבציה, ורוצים להבין למה">
+            <article class="lec rv" id="lec-expect" data-i="4" data-aud="unit mechina org" data-title="ציפיות ואכזבות: איך המוח מתעדכן" data-need="שינויים ואכזבות שמורידים את המוטיבציה, ורוצים להבין למה">
         <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="../assets/lec-expect.jpg" data-src="../assets/lec-expect.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-expect-b">
           <span class="ix" aria-hidden="true">04</span>
@@ -498,39 +508,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         </div>
       </article>
 
-      <article class="lec quiet rv" id="lec-hard" data-i="9" data-aud="">
-        <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-hard-b">
-          <span class="ix" aria-hidden="true">05</span>
-          <span><span class="tagl">למבוגרים, בתיאום מראש</span><span class="ttl">המוח אחרי חוויות קשות</span></span>
-          <span class="pm" aria-hidden="true">+</span>
-        </button></h3>
-        <div class="body" id="lec-hard-b" hidden>
-          <div>
-            <h4 class="k">על מה ההרצאה</h4>
-            <p>אחרי אירוע קשה, אזעקת הלחץ במוח יכולה להישאר דלוקה זמן מה. אצל רוב האנשים היא נרגעת עם הזמן. הקבוצה יוצאת עם הבנה של התהליך הזה, ועם ידע ברור למי פונים כשצריך עזרה.</p>
-            <h4 class="k">אם קרה אירוע לאחרונה</h4>
-            <p>פנו קודם לשפ״ח של הרשות, למרכז החוסן האזורי, לקב״ן היחידה או לגורם המקצועי בארגון. הרצאת ידע יכולה לבוא אחר כך, בתיאום איתם.</p>
-            <h4 class="k">זו שיחת עיבוד?</h4>
-            <p>לא. שיחת עיבוד היא תפקיד של אנשי מקצוע. זו הרצאת ידע.</p>
           </div>
-          <div>
-            <h4 class="k">איך אני עובד בנושא הזה</h4>
-            <ul>
-              <li>לפני ההרצאה אני מתאם עם איש מקצוע שמכיר את הקבוצה, כמו היועצת, קב״ן היחידה או איש בריאות הנפש בארגון.</li>
-              <li>יחד אנחנו בודקים מראש אם יש בקבוצה מי שנפגעו ישירות.</li>
-              <li>איש המקצוע נמצא באולם, וזמין גם אחרי ההרצאה.</li>
-              <li>המשתתפים יודעים מראש על מה נדבר, ומותר לצאת בכל רגע בלי להסביר.</li>
-              <li>אני מסביר מנגנונים כלליים, בלי תמונות קשות ובלי לדבר על מקרים. אף אחד לא מתבקש לשתף.</li>
-              <li>כל משתתף יוצא עם המספרים של ער״ן ושל נט״ל.</li>
-            </ul>
-          </div>
-          <div class="full">
-            <p class="lines">ער״ן <a href="tel:1201">1201</a>, בכל שעה · נט״ל <a href="tel:1800363363"><bdi>1 800 363 363</bdi></a> · בסכנה מיידית <a href="tel:101">101</a> או <a href="tel:100">100</a></p>
-            <a class="btn btn-ghost btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%20%D7%9E...%0A%D7%A9%D7%95%D7%A7%D7%9C%D7%99%D7%9D%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%94%D7%9E%D7%95%D7%97%20%D7%90%D7%97%D7%A8%D7%99%20%D7%97%D7%95%D7%95%D7%99%D7%95%D7%AA%20%D7%A7%D7%A9%D7%95%D7%AA%22%20%D7%9C%D7%A7%D7%91%D7%95%D7%A6%D7%94%20%D7%A9%D7%9C%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%0A%D7%9E%D7%99%20%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20...%0A%D7%94%D7%92%D7%95%D7%A8%D7%9D%20%D7%94%D7%9E%D7%A7%D7%A6%D7%95%D7%A2%D7%99%20%D7%A9%D7%9E%D7%9C%D7%95%D7%95%D7%94%20%D7%90%D7%95%D7%AA%D7%A0%D7%95%3A%20...%0A%D7%A0%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%94%20%D7%9E%D7%A7%D7%93%D7%99%D7%9E%D7%94" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לתאם שיחה מקדימה</a>
-          </div>
-        </div>
-      </article>
-    </div>
   </div>
 </section>
 
@@ -550,9 +528,9 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         </div>
         <p class="q" id="q2">מה הכי קרוב למה שאתם רואים?</p>
         <div class="opts" role="group" aria-labelledby="q2">
+          <button class="opt" type="button" aria-pressed="false" data-lec="lec-parents">הורים שרוצים להבין מה המסכים וה AI עושים לילדים.</button>
           <button class="opt" type="button" aria-pressed="false" data-lec="lec-screens">עייפות וקושי להתרכז, ורוצים להבין מה המסכים קשורים לזה.</button>
           <button class="opt" type="button" aria-pressed="false" data-lec="lec-perf">אנשים טובים שנתקעים על פרטים קטנים, ומסתירים טעויות.</button>
-          <button class="opt" type="button" aria-pressed="false" data-lec="lec-service">רוצים שהצעירים יבחרו בשירות משמעותי, ויבינו מה הם מרוויחים ממנו.</button>
           <button class="opt" type="button" aria-pressed="false" data-lec="lec-expect">שינויים ואכזבות מורידים את המוטיבציה, ורוצים להבין למה.</button>
           <button class="opt" type="button" aria-pressed="false" data-lec="other">משהו אחר</button>
         </div>
@@ -586,12 +564,15 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         <p class="rv">בהרצאות אני הכי אוהב את השאלות. כשמישהו מרים יד ושואל "רגע, אז למה זה קורה לי?", אני יודע שההרצאה עבדה.</p>
         <p class="ethic rv">אין לי רישיון לטפל או לאבחן, ולכן אני מעביר הרצאות העשרה בלבד.</p>
       </div>
+      <div class="about-side">
+      <figure class="amedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="../assets/eeg.jpg" data-src="../assets/eeg.mp4"></video></figure>
       <ul class="creds">
         <li class="rv" data-n="01">תואר ראשון במדעי המוח ופסיכולוגיה, אוניברסיטת בן גוריון</li>
         <li class="rv" data-n="02">סטודנט לתואר שני בנוירופסיכולוגיה קלינית שיקומית, האוניברסיטה העברית</li>
         <li class="rv" data-n="03"><span>חוקר עדכון ציפיות ודיכאון במעבדת <bdi lang="en">EEG</bdi></span></li>
         <li class="rv" data-n="04">סרן במילואים</li>
       </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -644,10 +625,10 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         <div class="fld"><label for="f-lec">איזו הרצאה</label>
           <select id="f-lec">
             <option value="">עוד לא החלטתי</option>
+<option data-aud="edu" value="להורים: המוח המתבגר בעידן המסכים וה AI">להורים: המוח המתבגר בעידן המסכים וה AI</option>
             <option data-aud="edu" value="מסכים והמוח המתבגר">מסכים והמוח המתבגר: בין התפתחות לניוון</option>
             <option data-aud="org" value="פרפקציוניזם">פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה</option>
-            <option data-aud="edu" value="שירות משמעותי">איך שירות צבאי משמעותי יכול לפתח אותנו</option>
-            <option value="ציפיות ואכזבות">ציפיות ואכזבות: איך המוח מתעדכן</option>
+                        <option value="ציפיות ואכזבות">ציפיות ואכזבות: איך המוח מתעדכן</option>
           </select>
         </div>
         <div class="row2">
@@ -831,10 +812,10 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
 
   /* ---------- lecture visuals and contact light: load and play only while visible ---------- */
   (function () {
-    var vids = document.querySelectorAll('.lmedia video, .caust video'); if (!vids.length || reduce || !('IntersectionObserver' in window)) return;
+    var vids = document.querySelectorAll('.lmedia video, .caust video, .amedia video, .hamb video'), narrow = matchMedia('(max-width: 700px)').matches; if (!vids.length || reduce || !('IntersectionObserver' in window)) return;
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) {
       var v = e.target;
-      if (e.isIntersecting) { if (!v.getAttribute('src')) v.src = v.dataset.src; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      if (e.isIntersecting) { if (!v.getAttribute('src')) { v.src = (narrow && v.dataset.srcM) || v.dataset.src; v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true }); } var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
       else if (!v.paused) v.pause();
     }); }, { rootMargin: '160px 0px' });
     vids.forEach(function (v) { io.observe(v); });

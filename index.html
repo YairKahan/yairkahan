@@ -36,12 +36,12 @@
    an EEG trace as scroll progress, an audience switch, a lecture matcher and circular wipes between states. */
 :root{
   --bg:#FAF7F6;--bg2:#F1F5F9;--card:#FFFFFF;--card2:#E5EDF7;--line:rgba(17,17,17,.10);--line2:rgba(17,17,17,.18);
-  --ink:#111111;--ink2:#33373D;--muted:#5E636A;--sig:#3B7DB5;--sig-t:#28628F;--btn:#111111;--btn-ink:#FAF7F6;--rec:#B42318;--wa:#15803D;--wa-ink:#FFFFFF;
+  --ink:#111111;--ink2:#33373D;--muted:#4D5259;--sig:#3674AA;--sig-t:#1F5179;--btn:#111111;--btn-ink:#FAF7F6;--rec:#B42318;--wa:#166534;--wa-ink:#FFFFFF;
   --glow:rgba(110,168,214,.22);--soft:rgba(59,125,181,.07);
   --serif:"Frank Ruhl Libre","Times New Roman",serif;--sans:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,sans-serif;--mono:var(--serif);--r:22px;--ease:cubic-bezier(.2,.7,.1,1)
 }
 html[data-theme="dark"]{--bg:#0F1214;--bg2:#14181B;--card:#1B2024;--card2:#161A1E;--line:rgba(242,239,238,.12);--line2:rgba(242,239,238,.24);
-  --ink:#F2EFEE;--ink2:#CFCAC8;--muted:#A2A6AC;--sig:#8EC1E6;--sig-t:#C8E0F0;--btn:#F2EFEE;--btn-ink:#0F1214;--rec:#F97066;
+  --ink:#F2EFEE;--ink2:#CFCAC8;--muted:#ABAFB5;--sig:#8EC1E6;--sig-t:#C8E0F0;--btn:#F2EFEE;--btn-ink:#0F1214;--rec:#F97066;
   --glow:rgba(142,193,230,.2);--soft:rgba(142,193,230,.09)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -104,7 +104,7 @@ html[data-theme="dark"] .icon-btn .moon,html[data-theme="light"] .icon-btn .sun{
 .lens::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.55));z-index:1;pointer-events:none}
 .scan{position:absolute;inset:0 0 auto 0;height:30%;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--sig) 24%,transparent),transparent);display:none}
 @keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(430%)}}
-.rec{position:absolute;top:14px;right:14px;z-index:2;display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(10,12,16,.6);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.rec{position:absolute;top:14px;right:14px;z-index:2;display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(10,12,16,.74);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .rec i{width:8px;height:8px;border-radius:50%;background:#E08A72;animation:breathe 3s ease-in-out infinite}
 @keyframes breathe{50%{opacity:.35}}
 @keyframes blink{50%{opacity:.25}}
@@ -696,7 +696,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
   /* ---------- colour helper for the canvases ---------- */
   function sigRgb() {
     var v = getComputedStyle(root).getPropertyValue('--sig').trim().replace('#', '');
-    if (v.length !== 6) return '59,125,181';
+    if (v.length !== 6) return '54,116,170';
     return parseInt(v.slice(0, 2), 16) + ',' + parseInt(v.slice(2, 4), 16) + ',' + parseInt(v.slice(4, 6), 16);
   }
   var COL = sigRgb();

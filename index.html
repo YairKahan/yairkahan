@@ -18,8 +18,8 @@
 <meta property="og:image:alt" content="יאיר כהאן מרצה מול קהל">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F5F2EC" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF7F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1214" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-48.png" sizes="48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -35,14 +35,14 @@
 /* v9: bone paper, ink and one brass accent, with a live network in the hero, an engraved brain plate,
    an EEG trace as scroll progress, an audience switch, a lecture matcher and circular wipes between states. */
 :root{
-  --bg:#F5F2EC;--bg2:#EEE9DF;--card:#FBFAF6;--card2:#E9E2D4;--line:rgba(21,23,27,.11);--line2:rgba(21,23,27,.2);
-  --ink:#15171B;--ink2:#3B3F47;--muted:#5F636B;--sig:#A67B2E;--sig-t:#7E5819;--btn:#15171B;--btn-ink:#F5F2EC;--rec:#B42318;--wa:#15803D;--wa-ink:#FFFFFF;
-  --glow:rgba(166,123,46,.18);--soft:rgba(166,123,46,.08);
+  --bg:#FAF7F6;--bg2:#F1F5F9;--card:#FFFFFF;--card2:#E5EDF7;--line:rgba(17,17,17,.10);--line2:rgba(17,17,17,.18);
+  --ink:#111111;--ink2:#33373D;--muted:#5E636A;--sig:#3B7DB5;--sig-t:#28628F;--btn:#111111;--btn-ink:#FAF7F6;--rec:#B42318;--wa:#15803D;--wa-ink:#FFFFFF;
+  --glow:rgba(110,168,214,.22);--soft:rgba(59,125,181,.07);
   --serif:"Frank Ruhl Libre","Times New Roman",serif;--sans:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,sans-serif;--mono:var(--serif);--r:22px;--ease:cubic-bezier(.2,.7,.1,1)
 }
-html[data-theme="dark"]{--bg:#121417;--bg2:#171A1E;--card:#1E2126;--card2:#181B1F;--line:rgba(236,232,224,.12);--line2:rgba(236,232,224,.24);
-  --ink:#ECE8E0;--ink2:#C9C5BD;--muted:#A0A3AA;--sig:#D9AE5F;--sig-t:#E2BC72;--btn:#ECE8E0;--btn-ink:#121417;--rec:#F97066;
-  --glow:rgba(217,174,95,.2);--soft:rgba(217,174,95,.09)}
+html[data-theme="dark"]{--bg:#0F1214;--bg2:#14181B;--card:#1B2024;--card2:#161A1E;--line:rgba(242,239,238,.12);--line2:rgba(242,239,238,.24);
+  --ink:#F2EFEE;--ink2:#CFCAC8;--muted:#A2A6AC;--sig:#8EC1E6;--sig-t:#C8E0F0;--btn:#F2EFEE;--btn-ink:#0F1214;--rec:#F97066;
+  --glow:rgba(142,193,230,.2);--soft:rgba(142,193,230,.09)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -689,7 +689,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
   /* ---------- colour helper for the canvases ---------- */
   function sigRgb() {
     var v = getComputedStyle(root).getPropertyValue('--sig').trim().replace('#', '');
-    if (v.length !== 6) return '166,123,46';
+    if (v.length !== 6) return '59,125,181';
     return parseInt(v.slice(0, 2), 16) + ',' + parseInt(v.slice(2, 4), 16) + ',' + parseInt(v.slice(4, 6), 16);
   }
   var COL = sigRgb();

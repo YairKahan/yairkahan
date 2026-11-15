@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://yairkahan.github.io/yairkahan/">
 <meta property="og:site_name" content="יאיר כהאן">
 <meta property="og:title" content="יאיר כהאן | הרצאות במדעי המוח">
-<meta property="og:description" content="בואו להבין יותר טוב את המוח שלנו. הרצאות העשרה על המוח לארגונים, יחידיות צבאיות, מכינות ובתי ספר, בשפה פשוטה ומבוססת מחקר.">
+<meta property="og:description" content="בואו להבין יותר טוב את המוח שלנו. הרצאות העשרה על המוח לארגונים, יחידות צבאיות, מכינות ובתי ספר, בשפה פשוטה ומבוססת מחקר.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://yairkahan.github.io/yairkahan/">
@@ -303,6 +303,39 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
   .trace path{stroke-dashoffset:0}
   .pe .real{transform:scale(1)}
 }
+
+/* ---------- lecture visuals: gentle Higgsfield loops ---------- */
+.lmedia{position:relative;aspect-ratio:16/5;background:#FAF7F6;overflow:hidden}
+.lec.open .lmedia{aspect-ratio:auto;height:clamp(180px,24vw,290px)}
+@media (max-width:640px){.lmedia{aspect-ratio:12/5}}
+.lmedia video,.lmedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.lmedia::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,transparent,var(--card));pointer-events:none}
+.lec{position:relative;transition:border-color .3s,opacity .4s,transform .5s var(--ease),box-shadow .5s var(--ease)}   /* relative: the reveal circle starts from the button inside the card */
+@media (hover:hover){.lec:not(.open):hover{transform:translateY(-3px);box-shadow:0 20px 44px -22px rgba(59,125,181,.45)}}
+html[data-theme="dark"] .lmedia video,html[data-theme="dark"] .lmedia img{opacity:.86}
+.lec.quiet .lmedia{aspect-ratio:4/1;border-radius:calc(var(--r) - 1px) calc(var(--r) - 1px) 0 0}
+.lec.quiet .lmedia::after{background:linear-gradient(180deg,transparent,var(--bg))}
+@media (max-width:640px){.lec.quiet .lmedia{aspect-ratio:12/5}}
+.hamb{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.85;background:#FAF7F6 url(assets/hero-amb.jpg) center/cover no-repeat}
+.hamb video{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 1.2s}
+.hamb video.on{opacity:1}
+@media (max-width:700px){.hamb{background-image:url(assets/hero-amb-m.jpg)}}
+html[data-theme="dark"] .hamb{opacity:.06}
+/* ---------- about: research visual ---------- */
+.amedia{position:relative;margin:0 0 12px;aspect-ratio:2/1;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#FAF7F6}
+.amedia video,.amedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+html[data-theme="dark"] .amedia video{opacity:.86}
+/* ---------- contact: light drifting like water ---------- */
+#contact{overflow:hidden}
+.caust{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6;-webkit-mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent);mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent)}
+.caust video,.caust img{width:100%;height:100%;object-fit:cover;display:block}
+#contact .wrap{position:relative;z-index:1}
+html[data-theme="dark"] .caust{opacity:.1}
+/* ---------- a soft light that follows the pointer (desktop) ---------- */
+.glowc{position:fixed;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;pointer-events:none;z-index:1;opacity:0;transition:opacity .8s;
+  background:radial-gradient(circle,rgba(200,224,240,.34),rgba(200,224,240,0) 62%);mix-blend-mode:multiply}
+html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,230,.09),rgba(142,193,230,0) 62%);mix-blend-mode:screen}
+@media (prefers-reduced-motion:reduce),(hover:none){.glowc{display:none}}
 </style>
 </head>
 <body>
@@ -329,12 +362,13 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
 
 <main id="top">
 <section class="hero" id="hero" style="padding-bottom:110px">
+  <div class="hamb" aria-hidden="true"><video muted loop playsinline preload="none" data-src="assets/hero-amb.mp4" data-src-m="assets/hero-amb-m.mp4"></video></div>
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
       <h1 class="kicker"><i aria-hidden="true"></i>הרצאות במדעי המוח לבתי ספר, מכינות, צבא וארגונים</h1>
       <p class="display"><span class="l"><span>בואו להבין</span></span><span class="l"><span>יותר טוב</span></span><span class="l"><span><em>את המוח שלנו<svg class="uline" viewBox="0 0 300 10" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M298 5 C 220 2.5, 120 2.5, 2 6.5"/></svg></em></span></span></p>
-      <p class="sub">אני יאיר כהאן, בוגר תואר ראשון במדעי המוח, סטודנט לתואר שני בנוירופסיכולוגיה באוניברסיטה העברית וסרן במילואים. בהרצאות אני מסביר איך המוח עובד, בשפה פשוטה ונותן כלים מהמחקר העדכניס</p>
+      <p class="sub">אני יאיר כהאן, בוגר תואר ראשון במדעי המוח, סטודנט לתואר שני בנוירופסיכולוגיה באוניברסיטה העברית וסרן במילואים. בהרצאות אני מסביר איך המוח עובד, בשפה פשוטה, ונותן כלים מהמחקר העדכני.</p>
       <div class="ctas">
         <a class="btn btn-sig" href="#lectures">לרשימת ההרצאות</a>
         <a class="btn btn-ghost" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%0A%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20...%20%28%D7%9E%D7%99%20%D7%94%D7%9D%29%2C%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%0A%D7%9E%D7%94%20%D7%9E%D7%A2%D7%A1%D7%99%D7%A7%20%D7%90%D7%95%D7%AA%D7%9D%20%D7%A2%D7%9B%D7%A9%D7%99%D7%95%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%2C%20%D7%90%D7%9D%20%D7%99%D7%A9%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>או לשאול שאלה בוואטסאפ</a>
@@ -379,6 +413,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
     <div class="lecs">
 
             <article class="lec rv" id="lec-parents" data-i="1" data-aud="school" data-title="להורים: המוח המתבגר בעידן המסכים וה AI" data-need="הילדים לא עוזבים את המסך, ורוצים להבין מה קורה להם במוח">
+        <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lec-parents.jpg" data-src="assets/lec-parents.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-parents-b">
           <span class="ix" aria-hidden="true">01</span>
           <span><span class="tagl">הורים · ועדי הורים <span class="fit">מתאים לכם</span></span><span class="ttl">להורים: המוח המתבגר בעידן המסכים וה AI</span><span class="hook">מה שהמחקר יודע ורוב ההורים עדיין לא</span></span>
@@ -400,6 +435,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
       </article>
 
 <article class="lec rv" id="lec-screens" data-i="2" data-aud="school mechina unit" data-title="מסכים והמוח המתבגר: בין התפתחות לניוון" data-need="עייפות וקושי להתרכז, ורוצים להבין מה המסכים קשורים לזה">
+        <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lec-screens.jpg" data-src="assets/lec-screens.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-screens-b">
           <span class="ix" aria-hidden="true">02</span>
           <span><span class="tagl">בתי ספר · מכינות · צבא <span class="fit">מתאים לכם</span></span><span class="ttl">מסכים והמוח המתבגר: בין התפתחות לניוון</span><span class="hook">איך ההתבגרות לצד מסכים משפיעה על הדור הצעיר, והאם אפשר לרתום את הטכנולוגיה לטובתנו?</span></span>
@@ -409,10 +445,10 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
           <div>
             <h4 class="k">האתגר</h4>
             <p>אתם רואים את הדור הצעיר גדל צמוד למסכים, ולא בטוחים איך נכון להתייחס לזה? </p>
-            <p>ההרצאה מציגה למשתתפים איך התבגרות לצד המסכים עשוייה להשפיע על ההתפתחות שלהם, איך אפשר להפוך את המסכים ליתרון, ומה הסכנות כשנשאבים אליהם.</p>
-            <div class="brain"><h4 class="k">מה קורה במוח</h4><p>בגיל ההתבגרות המערכת שאחראית על הניהול הוויסות העצמי שלנו מתעצבת, וכמו מערכות רבות במוח, ככל שנתרגל אותה יותר, היא תפתח יותר. על כן, שהייה רבה מול מסכים בצורה פסיבית עשויה להקשות עלינו יכולות ניהוליות, בעוד שניהול מערכות AI   ורכישת קישורים דרך הרשת עשויות לסייע לנו לפתח את המערכוות הנל .</p></div>
+            <p>ההרצאה מציגה למשתתפים איך התבגרות לצד המסכים עשויה להשפיע על ההתפתחות שלהם, איך אפשר להפוך את המסכים ליתרון, ומה הסכנות כשנשאבים אליהם.</p>
+            <div class="brain"><h4 class="k">מה קורה במוח</h4><p>בגיל ההתבגרות המערכת שאחראית על הניהול והוויסות העצמי שלנו מתעצבת, וכמו מערכות רבות במוח, ככל שנתרגל אותה יותר, היא תתפתח יותר. על כן, שהייה רבה מול מסכים בצורה פסיבית עלולה להקשות עלינו לפתח יכולות ניהוליות, בעוד שניהול מערכות AI ורכישת כישורים דרך הרשת עשויים לסייע לנו לפתח את המערכות האלה.</p></div>
             <h4 class="k">יוצאים עם</h4>
-            <ul><li>איך ניתן להפוך את הטכנולוגיה לייתרון </li><li>איך השאבות למסכים עשויה לפגוע בנו</li></ul>
+            <ul><li>איך ניתן להפוך את הטכנולוגיה ליתרון</li><li>איך ההישאבות למסכים עלולה לפגוע בנו</li></ul>
             <p class="fmt">אפשר להוסיף מפגש נפרד להורים.</p>
             <a class="btn btn-sig btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%20%28%D7%91%D7%99%D7%AA%20%D7%A1%D7%A4%D7%A8%2C%20%D7%9E%D7%9B%D7%99%D7%A0%D7%94%20%D7%90%D7%95%20%D7%99%D7%97%D7%99%D7%93%D7%94%29%0A%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%99%D7%9D%20%D7%91%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%9E%D7%A1%D7%9B%D7%99%D7%9D%20%D7%95%D7%94%D7%9E%D7%95%D7%97%20%D7%94%D7%9E%D7%AA%D7%91%D7%92%D7%A8%3A%20%D7%91%D7%99%D7%9F%20%D7%94%D7%AA%D7%A4%D7%AA%D7%97%D7%95%D7%AA%20%D7%9C%D7%A0%D7%99%D7%95%D7%95%D7%9F%22%0A%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%20%D7%91%D7%92%D7%99%D7%9C%20...%0A%D7%9E%D7%94%20%D7%94%D7%99%D7%99%D7%A0%D7%95%20%D7%A8%D7%95%D7%A6%D7%99%D7%9D%20%D7%A9%D7%99%D7%99%D7%A9%D7%90%D7%A8%20%D7%9C%D7%94%D7%9D%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לבדוק תאריך בוואטסאפ</a>
           </div>
@@ -424,6 +460,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
       </article>
 
       <article class="lec rv" id="lec-perf" data-i="3" data-aud="org" data-title="פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה" data-need="אנשים טובים שנתקעים על פרטים קטנים, ומסתירים טעויות">
+        <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lec-perf.jpg" data-src="assets/lec-perf.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-perf-b">
           <span class="ix" aria-hidden="true">03</span>
           <span><span class="tagl">ארגונים <span class="fit">מתאים לכם</span></span><span class="ttl">פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה</span><span class="hook">למה מייל של שתי שורות לוקח שעה?</span></span>
@@ -447,6 +484,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
       </article>
 
             <article class="lec rv" id="lec-expect" data-i="4" data-aud="unit mechina org" data-title="ציפיות ואכזבות: איך המוח מתעדכן" data-need="שינויים ואכזבות שמורידים את המוטיבציה, ורוצים להבין למה">
+        <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lec-expect.jpg" data-src="assets/lec-expect.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-expect-b">
           <span class="ix" aria-hidden="true">04</span>
           <span><span class="tagl">צבא · מכינות · ארגונים <span class="fit">מתאים לכם</span></span><span class="ttl">ציפיות ואכזבות: איך המוח מתעדכן</span><span class="hook">מה המוח עושה כשציפינו להצלחה, והמציאות הפתיעה?</span></span>
@@ -525,12 +563,15 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
         <p class="rv">בהרצאות אני הכי אוהב את השאלות. כשמישהו מרים יד ושואל "רגע, אז למה זה קורה לי?", אני יודע שההרצאה עבדה.</p>
         <p class="ethic rv">אין לי רישיון לטפל או לאבחן, ולכן אני מעביר הרצאות העשרה בלבד.</p>
       </div>
+      <div class="about-side">
+      <figure class="amedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/eeg.jpg" data-src="assets/eeg.mp4"></video></figure>
       <ul class="creds">
         <li class="rv" data-n="01">תואר ראשון במדעי המוח ופסיכולוגיה, אוניברסיטת בן גוריון</li>
         <li class="rv" data-n="02">סטודנט לתואר שני בנוירופסיכולוגיה קלינית שיקומית, האוניברסיטה העברית</li>
         <li class="rv" data-n="03"><span>חוקר עדכון ציפיות ודיכאון במעבדת <bdi lang="en">EEG</bdi></span></li>
         <li class="rv" data-n="04">סרן במילואים</li>
       </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -552,6 +593,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
 </section>
 
 <section id="contact" class="sweep">
+  <div class="caust" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/caustics.jpg" data-src="assets/caustics.mp4"></video></div>
   <div class="wrap">
     <span class="sec-n rv" aria-hidden="true">05</span>
     <div class="contact-g">
@@ -698,7 +740,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
     function size() {
       d = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
       var n = Math.max(26, Math.min(80, Math.round(w * h / 17000))); nodes = []; pulses = [];
-      for (var i = 0; i < n; i++) nodes.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .14, vy: (Math.random() - .5) * .14, e: 0 });
+      for (var i = 0; i < n; i++) nodes.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .14, vy: (Math.random() - .5) * .14, e: 0, r: 0 });
     }
     function frame() {
       ctx.clearRect(0, 0, w, h);
@@ -708,7 +750,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
         if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
         dd = Math.hypot(p.x - mx, p.y - my); if (dd < 160) p.e = Math.max(p.e, 1 - dd / 160);
         if (ring && Math.abs(Math.hypot(p.x - ring.x, p.y - ring.y) - ring.r) < 24) p.e = 1;
-        p.e *= .965;
+        p.e *= .965; if (p.r > 0) p.r--;
       }
       ctx.lineWidth = 1;
       for (i = 0; i < nodes.length; i++) for (j = i + 1; j < nodes.length; j++) {
@@ -720,18 +762,23 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
         }
       }
       for (i = 0; i < nodes.length; i++) {
-        p = nodes[i]; ctx.fillStyle = 'rgba(' + COL + ',' + (.3 + .5 * p.e) + ')';
+        p = nodes[i];
+        if (p.e > .2) { var hg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 4 + 16 * p.e); hg.addColorStop(0, 'rgba(' + COL + ',' + (.22 * p.e) + ')'); hg.addColorStop(1, 'rgba(' + COL + ',0)'); ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(p.x, p.y, 4 + 16 * p.e, 0, 6.283); ctx.fill(); }
+        ctx.fillStyle = 'rgba(' + COL + ',' + (.3 + .5 * p.e) + ')';
         ctx.beginPath(); ctx.arc(p.x, p.y, 1.6 + 2.4 * p.e, 0, 6.283); ctx.fill();
       }
       if (Math.random() < .03 && pulses.length < 8) {
         i = Math.floor(Math.random() * nodes.length);
-        for (j = 0; j < nodes.length; j++) if (j !== i && Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y) < R) { pulses.push({ a: i, b: j, t: 0 }); break; }
+        for (j = 0; j < nodes.length; j++) if (j !== i && Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y) < R) { pulses.push({ a: i, b: j, t: 0, s: .014, g: 1 }); break; }
       }
       for (i = pulses.length - 1; i >= 0; i--) {
-        var u = pulses[i]; u.t += .014; p = nodes[u.a]; q = nodes[u.b];
+        var u = pulses[i]; u.t += u.s || .014; p = nodes[u.a]; q = nodes[u.b];
         if (!p || !q) { pulses.splice(i, 1); continue; }
-        if (u.t >= 1) { q.e = 1; pulses.splice(i, 1); continue; }
-        ctx.fillStyle = 'rgba(' + COL + ',.8)'; ctx.shadowColor = 'rgba(' + COL + ',.5)'; ctx.shadowBlur = 5;
+        if (u.t >= 1) { pulses.splice(i, 1); fire(u.b, u.g || 1, R); continue; }
+        var t0 = Math.max(0, u.t - .12);   /* a short tail behind the signal */
+        ctx.strokeStyle = 'rgba(' + COL + ',.35)'; ctx.lineWidth = 2; ctx.beginPath();
+        ctx.moveTo(p.x + (q.x - p.x) * t0, p.y + (q.y - p.y) * t0); ctx.lineTo(p.x + (q.x - p.x) * u.t, p.y + (q.y - p.y) * u.t); ctx.stroke(); ctx.lineWidth = 1;
+        ctx.fillStyle = 'rgba(' + COL + ',.85)'; ctx.shadowColor = 'rgba(' + COL + ',.55)'; ctx.shadowBlur = 8;
         ctx.beginPath(); ctx.arc(p.x + (q.x - p.x) * u.t, p.y + (q.y - p.y) * u.t, 2.4, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
       }
       if (ring) {
@@ -741,14 +788,46 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
       }
       if (on && !reduce) requestAnimationFrame(frame);
     }
+    function fire(k, gen, R) {
+      var n = nodes[k]; if (!n) return; n.e = 1;
+      if (n.r > 0 || gen > 6 || pulses.length > 34) return;
+      n.r = 110; R = R || Math.min(170, w * .22 + 60);
+      var nb = [], j; for (j = 0; j < nodes.length; j++) if (j !== k && Math.hypot(n.x - nodes[j].x, n.y - nodes[j].y) < R) nb.push(j);
+      nb.sort(function () { return Math.random() - .5; });
+      var odds = gen < 2 ? 1 : .62 - gen * .07, max = gen < 2 ? 4 : 2;
+      for (j = 0; j < nb.length && j < max; j++) if (Math.random() < odds) pulses.push({ a: k, b: nb[j], t: 0, s: .011 + Math.random() * .012, g: gen + 1 });
+    }
+    function nearest(x, y) { var b = 0, bd = 1e9; for (var j = 0; j < nodes.length; j++) { var dd = Math.hypot(nodes[j].x - x, nodes[j].y - y); if (dd < bd) { bd = dd; b = j; } } return b; }
     function pos(e) { var r = c.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
     hero.addEventListener('pointermove', function (e) { var p = pos(e); mx = p.x; my = p.y; });
     hero.addEventListener('pointerleave', function () { mx = my = -1e4; });
-    hero.addEventListener('pointerdown', function (e) { var p = pos(e); ring = { x: p.x, y: p.y, r: 0, a: .45 }; });
+    hero.addEventListener('pointerdown', function (e) { var p = pos(e); ring = { x: p.x, y: p.y, r: 0, a: .45 }; var k = nearest(p.x, p.y); nodes[k].r = 0; fire(k, 0); });
     size(); addEventListener('resize', size);
     if (reduce) { frame(); return; }
     new IntersectionObserver(function (es) { es.forEach(function (e) { var was = on; on = e.isIntersecting; if (on && !was) frame(); }); }).observe(hero);
     $('.brand').addEventListener('click', function () { ring = { x: w * .5, y: h * .4, r: 0, a: .5 }; });
+  })();
+
+
+  /* ---------- lecture visuals and contact light: load and play only while visible ---------- */
+  (function () {
+    var vids = document.querySelectorAll('.lmedia video, .caust video, .amedia video, .hamb video'), narrow = matchMedia('(max-width: 700px)').matches; if (!vids.length || reduce || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { if (!v.getAttribute('src')) { v.src = (narrow && v.dataset.srcM) || v.dataset.src; v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true }); } var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      else if (!v.paused) v.pause();
+    }); }, { rootMargin: '160px 0px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+
+  /* ---------- a soft light that follows the pointer (desktop only) ---------- */
+  (function () {
+    if (reduce || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var g = document.createElement('div'); g.className = 'glowc'; g.setAttribute('aria-hidden', 'true'); document.body.appendChild(g);
+    var x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, run = false;
+    function step() { x += (tx - x) * .12; y += (ty - y) * .12; g.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; if (Math.abs(tx - x) + Math.abs(ty - y) > .5) requestAnimationFrame(step); else run = false; }
+    addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; g.style.opacity = 1; if (!run) { run = true; requestAnimationFrame(step); } }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { g.style.opacity = 0; });
   })();
 
   /* ---------- reveal, counters ---------- */
@@ -783,6 +862,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
       b.style.setProperty('--cx', (ev && ev.clientX ? ev.clientX - r.left : r.width * .9) + 'px');
       b.style.setProperty('--cy', ((ev && ev.clientY ? ev.clientY - r.top : 20) - b.offsetTop) + 'px');
       b.classList.remove('reveal'); void b.offsetWidth; b.classList.add('reveal');
+      b.addEventListener('animationend', function done() { b.classList.remove('reveal'); b.removeEventListener('animationend', done); });   /* never leave long content clipped */
     }
   }
   function openLec(card, ev) {

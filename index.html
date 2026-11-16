@@ -321,6 +321,22 @@ html[data-theme="dark"] .lmedia video,html[data-theme="dark"] .lmedia img{opacit
 .hamb video.on{opacity:1}
 @media (max-width:700px){.hamb{background-image:url(assets/hero-amb-m.jpg)}}
 html[data-theme="dark"] .hamb{opacity:.06}
+/* ---------- live brain in the hero ---------- */
+.hvis{position:relative;display:grid;justify-items:center;align-items:center}
+.brain3d{position:relative;width:min(600px,100%);aspect-ratio:1/1;margin:0}
+.brain3d::before{content:"";position:absolute;inset:8%;border-radius:50%;background:none;pointer-events:none}
+html[data-theme="dark"] .brain3d::before{background:radial-gradient(circle,rgba(54,116,170,.22),rgba(54,116,170,0) 66%)}
+.brain3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:pan-y}
+.bhint{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);white-space:nowrap;font-size:13px;color:var(--muted);transition:opacity 1s;pointer-events:none}
+.bhint.off{opacity:0}
+.brain3d.nogl{display:none}
+.hvis .lens{position:absolute;right:-2%;bottom:-12%;width:min(170px,30%);border-radius:20px;z-index:3}
+@media(min-width:901px){.brain3d{width:min(660px,122%);margin:0 -11%}}
+@media(max-width:900px){
+  .hvis{display:contents}
+  .brain3d{order:-1;width:min(400px,96%);justify-self:center;margin:-34px auto -26px}
+  .hvis .lens{position:relative;left:auto;bottom:auto;order:1;width:min(300px,78%);border-radius:28px}
+}
 /* ---------- about: research visual ---------- */
 .amedia{position:relative;margin:0 0 12px;aspect-ratio:2/1;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#FAF7F6}
 .amedia video,.amedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -362,7 +378,6 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
 <main id="top">
 <section class="hero" id="hero" style="padding-bottom:110px">
   <div class="hamb" aria-hidden="true"><video muted loop playsinline preload="none" data-src="assets/hero-amb.mp4" data-src-m="assets/hero-amb-m.mp4"></video></div>
-  <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
       <h1 class="kicker"><i aria-hidden="true"></i>הרצאות במדעי המוח לבתי ספר, מכינות, צבא וארגונים</h1>
@@ -373,12 +388,15 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         <a class="btn btn-ghost" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%0A%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20...%20%28%D7%9E%D7%99%20%D7%94%D7%9D%29%2C%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%0A%D7%9E%D7%94%20%D7%9E%D7%A2%D7%A1%D7%99%D7%A7%20%D7%90%D7%95%D7%AA%D7%9D%20%D7%A2%D7%9B%D7%A9%D7%99%D7%95%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%2C%20%D7%90%D7%9D%20%D7%99%D7%A9%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>או לשאול שאלה בוואטסאפ</a>
       </div>
     </div>
+    <div class="hvis">
+      <figure class="brain3d" aria-hidden="true"><canvas id="brain"></canvas><span class="bhint">אפשר לגעת במוח</span></figure>
     <figure class="lens">
-      <video id="heroVid" muted loop playsinline preload="none" poster="assets/hero-poster.jpg" data-src="assets/hero.mp4" aria-label="יאיר כהאן מרצה מול קהל"></video>
-      <span class="scan" aria-hidden="true"></span>
-      <figcaption class="rec"><i aria-hidden="true"></i>מתוך הרצאה</figcaption>
-      <button class="vp" id="vp" type="button" aria-pressed="false" aria-label="עצירת הסרטון"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="ps" d="M3 2 V8 M7 2 V8"/><path class="pl" d="M3 1.8 L8.4 5 L3 8.2 Z"/></svg></button>
-    </figure>
+        <video id="heroVid" muted loop playsinline preload="none" poster="assets/hero-poster.jpg" data-src="assets/hero.mp4" aria-label="יאיר כהאן מרצה מול קהל"></video>
+        <span class="scan" aria-hidden="true"></span>
+        <figcaption class="rec"><i aria-hidden="true"></i>מתוך הרצאה</figcaption>
+        <button class="vp" id="vp" type="button" aria-pressed="false" aria-label="עצירת הסרטון"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="ps" d="M3 2 V8 M7 2 V8"/><path class="pl" d="M3 1.8 L8.4 5 L3 8.2 Z"/></svg></button>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -709,80 +727,141 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     try { localStorage.setItem('theme', next); } catch (e) {}
   });
 
-  /* ---------- hero network ---------- */
+  /* ---------- live brain: a folded cortex of points, signals that cascade along its connections ---------- */
   (function () {
-    var c = $('#net'), hero = $('#hero'), ctx = c.getContext('2d'), w, h, d, nodes = [], pulses = [], mx = -1e4, my = -1e4, ring = null, on = false;
-    function size() {
-      d = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
-      var n = Math.max(26, Math.min(80, Math.round(w * h / 17000))); nodes = []; pulses = [];
-      for (var i = 0; i < n; i++) nodes.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .14, vy: (Math.random() - .5) * .14, e: 0, r: 0 });
+    var cv = $('#brain'); if (!cv) return;
+    var gl = cv.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: false });
+    if (!gl) { cv.parentNode.classList.add('nogl'); return; }
+    var seed = 20261116;
+    function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    function hash(x, y, z) { var h = Math.imul(x, 374761393) ^ Math.imul(y, 668265263) ^ Math.imul(z, 1440662683); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967295; }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function noise(x, y, z) {
+      var X = Math.floor(x), Y = Math.floor(y), Z = Math.floor(z), u = x - X, v = y - Y, w = z - Z;
+      u = u * u * (3 - 2 * u); v = v * v * (3 - 2 * v); w = w * w * (3 - 2 * w);
+      return lerp(lerp(lerp(hash(X, Y, Z), hash(X + 1, Y, Z), u), lerp(hash(X, Y + 1, Z), hash(X + 1, Y + 1, Z), u), v),
+                  lerp(lerp(hash(X, Y, Z + 1), hash(X + 1, Y, Z + 1), u), lerp(hash(X, Y + 1, Z + 1), hash(X + 1, Y + 1, Z + 1), u), v), w);
     }
-    function frame() {
-      ctx.clearRect(0, 0, w, h);
-      var R = Math.min(170, w * .22 + 60), i, j, p, q, dx, dy, dd;
-      for (i = 0; i < nodes.length; i++) {
-        p = nodes[i]; p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
-        dd = Math.hypot(p.x - mx, p.y - my); if (dd < 160) p.e = Math.max(p.e, 1 - dd / 160);
-        if (ring && Math.abs(Math.hypot(p.x - ring.x, p.y - ring.y) - ring.r) < 24) p.e = 1;
-        p.e *= .965; if (p.r > 0) p.r--;
-      }
-      ctx.lineWidth = 1;
-      for (i = 0; i < nodes.length; i++) for (j = i + 1; j < nodes.length; j++) {
-        p = nodes[i]; q = nodes[j]; dx = p.x - q.x; dy = p.y - q.y; dd = dx * dx + dy * dy;
-        if (dd < R * R) {
-          dd = Math.sqrt(dd);
-          ctx.strokeStyle = 'rgba(' + COL + ',' + ((1 - dd / R) * (.09 + .34 * Math.max(p.e, q.e))) + ')';
-          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
-        }
-      }
-      for (i = 0; i < nodes.length; i++) {
-        p = nodes[i];
-        if (p.e > .2) { var hg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 4 + 16 * p.e); hg.addColorStop(0, 'rgba(' + COL + ',' + (.22 * p.e) + ')'); hg.addColorStop(1, 'rgba(' + COL + ',0)'); ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(p.x, p.y, 4 + 16 * p.e, 0, 6.283); ctx.fill(); }
-        ctx.fillStyle = 'rgba(' + COL + ',' + (.3 + .5 * p.e) + ')';
-        ctx.beginPath(); ctx.arc(p.x, p.y, 1.6 + 2.4 * p.e, 0, 6.283); ctx.fill();
-      }
-      if (Math.random() < .03 && pulses.length < 8) {
-        i = Math.floor(Math.random() * nodes.length);
-        for (j = 0; j < nodes.length; j++) if (j !== i && Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y) < R) { pulses.push({ a: i, b: j, t: 0, s: .014, g: 1 }); break; }
-      }
-      for (i = pulses.length - 1; i >= 0; i--) {
-        var u = pulses[i]; u.t += u.s || .014; p = nodes[u.a]; q = nodes[u.b];
-        if (!p || !q) { pulses.splice(i, 1); continue; }
-        if (u.t >= 1) { pulses.splice(i, 1); fire(u.b, u.g || 1, R); continue; }
-        var t0 = Math.max(0, u.t - .12);   /* a short tail behind the signal */
-        ctx.strokeStyle = 'rgba(' + COL + ',.35)'; ctx.lineWidth = 2; ctx.beginPath();
-        ctx.moveTo(p.x + (q.x - p.x) * t0, p.y + (q.y - p.y) * t0); ctx.lineTo(p.x + (q.x - p.x) * u.t, p.y + (q.y - p.y) * u.t); ctx.stroke(); ctx.lineWidth = 1;
-        ctx.fillStyle = 'rgba(' + COL + ',.85)'; ctx.shadowColor = 'rgba(' + COL + ',.55)'; ctx.shadowBlur = 8;
-        ctx.beginPath(); ctx.arc(p.x + (q.x - p.x) * u.t, p.y + (q.y - p.y) * u.t, 2.4, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
-      }
-      if (ring) {
-        ring.r += 5; ring.a *= .965;
-        ctx.strokeStyle = 'rgba(' + COL + ',' + ring.a + ')'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(ring.x, ring.y, ring.r, 0, 6.283); ctx.stroke();
-        if (ring.a < .03) ring = null;
-      }
-      if (on && !reduce) requestAnimationFrame(frame);
+    function folds(x, y, z) { var n = noise(x * 3.7 + 11, y * 3.7, z * 3.7) * .82 + noise(x * 8.3, y * 8.3 + 5, z * 8.3) * .18; return 1 - Math.abs(2 * n - 1); }   /* 1 on a gyrus crest, 0 deep in a sulcus */
+    function band(r) { var t = Math.min(1, Math.max(0, (r - .62) / .3)); return t * t * (3 - 2 * t); }
+    function dir() { var y = 2 * rnd() - 1, a = 6.2832 * rnd(), r = Math.sqrt(1 - y * y); return [r * Math.cos(a), y, r * Math.sin(a)]; }
+    /* side-view outline of the cortex: radius from the centre for every angle (0 = frontal pole, 90 = top, 180 = occipital pole, 300 = temporal lobe) */
+    var OUT = [.8, .86, .82, .7, .71, .8, .86, .66, .44, .37, .6, .72, .8];
+    function outline(th) { var u = ((th % 6.2832) + 6.2832) % 6.2832 / 6.2832 * 12, k = Math.floor(u), t = u - k; t = t * t * (3 - 2 * t); return OUT[k] + (OUT[k + 1] - OUT[k]) * t; }
+    function groove(px, py, pz, side) {          /* distance to the lateral (Sylvian) fissure and the central sulcus, on the outer surface */
+      if (px * side < .14) return 9;
+      var sy = -.04 + (.42 - pz) * .3, dS = (pz < .5 && pz > -.25) ? Math.abs(py - sy) : 9;
+      var cz = .22 - (py - .05) * .38, dC = (py > sy + .05) ? Math.abs(pz - cz) : 9;
+      return Math.min(dS * 1.15, dC);
     }
-    function fire(k, gen, R) {
-      var n = nodes[k]; if (!n) return; n.e = 1;
-      if (n.r > 0 || gen > 6 || pulses.length > 34) return;
-      n.r = 110; R = R || Math.min(170, w * .22 + 60);
-      var nb = [], j; for (j = 0; j < nodes.length; j++) if (j !== k && Math.hypot(n.x - nodes[j].x, n.y - nodes[j].y) < R) nb.push(j);
-      nb.sort(function () { return Math.random() - .5; });
-      var odds = gen < 2 ? 1 : .62 - gen * .07, max = gen < 2 ? 4 : 2;
-      for (j = 0; j < nb.length && j < max; j++) if (Math.random() < odds) pulses.push({ a: k, b: nb[j], t: 0, s: .011 + Math.random() * .012, g: gen + 1 });
+    function hemi(side) {                       /* one hemisphere: the outline in side view, a flat medial wall, gyri and the two big grooves */
+      var d = dir(), x = d[0], cx = side * .22, cy = .05;
+      if (x * side < 0) x *= .3;
+      var th = Math.atan2(d[1], d[2]), r = outline(th), lat = Math.sqrt(Math.max(0, 1 - d[0] * d[0]));
+      var px = cx + x * .5 * (1 - .12 * Math.cos(th) * Math.cos(th)), py = cy + r * Math.sin(th) * lat, pz = r * Math.cos(th) * lat;
+      var r0 = folds(px, py, pz), g = groove(px, py, pz, side), k = 1 + .045 * r0 * r0;
+      if (g < .045) k -= .05 * (1 - g / .045);
+      return [cx + (px - cx) * k, cy + (py - cy) * k * .94, pz * k * 1.1, .3 + .7 * r0 * r0 * (g < .045 ? .12 : 1)];   /* every point stays visible, crests glow brighter; a little longer than tall, like a real brain */
     }
-    function nearest(x, y) { var b = 0, bd = 1e9; for (var j = 0; j < nodes.length; j++) { var dd = Math.hypot(nodes[j].x - x, nodes[j].y - y); if (dd < bd) { bd = dd; b = j; } } return b; }
-    function pos(e) { var r = c.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
-    hero.addEventListener('pointermove', function (e) { var p = pos(e); mx = p.x; my = p.y; });
-    hero.addEventListener('pointerleave', function () { mx = my = -1e4; });
-    hero.addEventListener('pointerdown', function (e) { var p = pos(e); ring = { x: p.x, y: p.y, r: 0, a: .45 }; var k = nearest(p.x, p.y); nodes[k].r = 0; fire(k, 0); });
-    size(); addEventListener('resize', size);
-    if (reduce) { frame(); return; }
-    new IntersectionObserver(function (es) { es.forEach(function (e) { var was = on; on = e.isIntersecting; if (on && !was) frame(); }); }).observe(hero);
-    $('.brand').addEventListener('click', function () { ring = { x: w * .5, y: h * .4, r: 0, a: .5 }; });
-  })();
+    function cereb() {                          /* cerebellum with fine folia, tucked under the back */
+      for (var i = 0; i < 20; i++) { var d = dir(), py = -.33 + d[1] * .2, pz = -.55 + d[2] * .27;
+        if (py < -.24 || pz < -.64) { var f = .5 + .5 * Math.sin(py * 80 + d[0] * 2); return [d[0] * .5, py * .94, pz * 1.1, .25 + .55 * f]; } }
+      return null;
+    }
+    function stem() { var t = rnd(), a = 6.2832 * rnd(), r = .085 * (1 - .25 * t); return [Math.cos(a) * r, (-.3 - .5 * t) * .94, (-.24 - .1 * t + Math.sin(a) * r) * 1.1, .35 + .3 * rnd()]; }
 
+    var small = innerWidth < 900, N = small ? 9000 : 15000, pts = [], nodeIx = [];
+    for (var i = 0; i < N; i++) {
+      var r = rnd(), q = r < .87 ? hemi(r < .435 ? -1 : 1) : r < .955 ? cereb() : stem();
+      if (!q) { i--; continue; }
+      pts.push(q); if (r < .955 && i % 9 === 0 && q[3] > .35) nodeIx.push(i);
+    }
+    /* connections: each node links to its nearest neighbours */
+    var M = nodeIx.length, adj = [], lines = [];
+    for (var a = 0; a < M; a++) adj.push([]);
+    for (a = 0; a < M; a++) {
+      var A = pts[nodeIx[a]], best = [];
+      for (var b = 0; b < M; b++) { if (a === b) continue; var B = pts[nodeIx[b]], dx = A[0] - B[0], dy = A[1] - B[1], dz = A[2] - B[2], dd = dx * dx + dy * dy + dz * dz;
+        if (dd < .04) { best.push([dd, b]); } }
+      best.sort(function (u, v) { return u[0] - v[0]; });
+      for (var c = 0; c < Math.min(3, best.length); c++) { var bb = best[c][1]; if (adj[a].indexOf(bb) < 0) { adj[a].push(bb); adj[bb].push(a); lines.push(a, bb); } }
+    }
+    /* buffers */
+    function arr(list, w) { var f = new Float32Array(list.length * 4), sc = new Float32Array(list.length * 3);
+      list.forEach(function (p, k) { f.set([p[0], p[1], p[2], w === undefined ? p[3] : w], k * 4); var d = dir(), rr = 1.6 + rnd() * 1.6; sc.set([d[0] * rr, d[1] * rr, d[2] * rr], k * 3); }); return [f, sc]; }
+    var P = arr(pts), lineList = []; for (i = 0; i < lines.length; i++) lineList.push(pts[nodeIx[lines[i]]]);
+    var Lb = arr(lineList, .5);
+    function buf(data) { var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); return b; }
+    var pB = buf(P[0]), pS = buf(P[1]), lB = buf(Lb[0]), lS = buf(Lb[1]), sB = gl.createBuffer(), sS = buf(new Float32Array(600 * 3));
+    var VS = 'attribute vec4 a;attribute vec3 s;uniform mat3 R;uniform float S,D,T,Pz,A,K,W;uniform vec3 H1,H2,H3;varying float v,hb;void main(){vec3 p=mix(s,a.xyz,K);vec3 q=R*p;float z=q.z+3.4;vec2 xy=q.xy*(3.4/z)*S;gl_Position=vec4(xy.x*W,xy.y,0.,1.);float w=.5+.5*sin(p.z*5.5-T*1.4+p.y*2.5);float dep=smoothstep(.9,-.7,q.z);vec3 nq=R*normalize(p-vec3(sign(p.x)*.22,.06,0.));float face=smoothstep(-.2,.55,-nq.z);float rim=pow(1.-abs(nq.z),2.);vec3 d1=p-H1,d2=p-H2,d3=p-H3;hb=clamp(exp(-dot(d1,d1)*22.)+exp(-dot(d2,d2)*22.)+exp(-dot(d3,d3)*22.),0.,1.);v=(.18+.82*a.w)*(.68+.32*w)*mix(.16,1.,dep*dep)*mix(.3,1.,face)*(.78+.7*rim*face)*(1.+.8*hb)*A;gl_PointSize=Pz*D*(1.3+1.5*a.w)*(1.+.35*hb)*(3.4/z);}';
+    var FSP = 'precision mediump float;varying float v,hb;uniform vec3 C1,C2,C3;uniform float H,Mx;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;float al=pow(smoothstep(.5,0.,d),H);gl_FragColor=vec4(mix(mix(C1,C2,clamp(v*Mx,0.,1.)),C3,hb*.7),clamp(al*v,0.,1.));}';
+    var FSL = 'precision mediump float;varying float v,hb;uniform vec3 C1,C2;uniform float H;void main(){gl_FragColor=vec4(mix(C1,C2,.55),v*H);}';
+    function prog(fs) { var p = gl.createProgram(); [[gl.VERTEX_SHADER, VS], [gl.FRAGMENT_SHADER, fs]].forEach(function (x) { var sh = gl.createShader(x[0]); gl.shaderSource(sh, x[1]); gl.compileShader(sh); gl.attachShader(p, sh); }); gl.linkProgram(p); return p; }
+    var PP = prog(FSP), PL = prog(FSL);
+    function U(p, n) { return gl.getUniformLocation(p, n); }
+
+    /* signals */
+    var ref = new Float32Array(M), glow = new Float32Array(M), sig = [];
+    var hot = [0, 1, 2].map(function () { var a = pts[nodeIx[Math.floor(rnd() * M)]], b = pts[nodeIx[Math.floor(rnd() * M)]]; return { a: a, b: b, t: rnd(), p: new Float32Array(3) }; });
+    function drift(dt) { hot.forEach(function (h) { h.t += dt / 6; if (h.t >= 1) { h.t = 0; h.a = h.b; h.b = pts[nodeIx[Math.floor(rnd() * M)]]; }
+      var e = h.t * h.t * (3 - 2 * h.t); h.p[0] = lerp(h.a[0], h.b[0], e); h.p[1] = lerp(h.a[1], h.b[1], e); h.p[2] = lerp(h.a[2], h.b[2], e); }); }
+    drift(0);
+    function fire(k, gen) { glow[k] = 1; if (ref[k] > 0 || gen > 7 || sig.length > 80) return; ref[k] = 80;
+      var nb = adj[k].slice().sort(function () { return rnd() - .5; }), odds = gen < 2 ? 1 : .66 - gen * .07, max = gen < 2 ? 4 : 2;
+      for (var j = 0; j < nb.length && j < max; j++) if (rnd() < odds) sig.push({ a: k, b: nb[j], t: 0, s: .02 + rnd() * .018, g: gen + 1 }); }
+
+    var yaw = 1.5708, yawT = 0, pitch = -.18, pitchT = -.18, K = reduce ? 1 : 0, T = 0, last = 0, on = false, w = 1, h = 1, D = 1, S = .84, Wr = 1, R = new Float32Array(9);
+    function mat() { var cy = Math.cos(yaw + yawT), sy = Math.sin(yaw + yawT), cp = Math.cos(pitch), sp = Math.sin(pitch);
+      R.set([cy, sp * sy, -cp * sy, 0, cp, sp, sy, -sp * cy, cp * cy]); }
+    function size() { D = Math.min(devicePixelRatio || 1, 2); w = cv.clientWidth; h = cv.clientHeight; cv.width = w * D; cv.height = h * D; gl.viewport(0, 0, cv.width, cv.height); Wr = h / w; }
+    function theme() { var dark = root.dataset.theme === 'dark';
+      return dark ? { c1: [.3, .56, .8], c2: [.82, .91, .97], c3: [.92, .97, 1], add: true, a: 1.55, l: .22, m: 1.3 } : { c1: [.36, .6, .84], c2: [.08, .28, .52], c3: [.12, .45, .85], add: false, a: 1.25, l: .34, m: 1.7 }; }
+    function draw(dt) {
+      var th = theme(); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, th.add ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); mat();
+      var ease = 1 - Math.pow(1 - K, 3);
+      function setup(p, b, sc, pz, al, hh) { gl.useProgram(p);
+        gl.uniformMatrix3fv(U(p, 'R'), false, R); gl.uniform1f(U(p, 'S'), S); gl.uniform1f(U(p, 'D'), D); gl.uniform1f(U(p, 'T'), T); gl.uniform1f(U(p, 'Pz'), pz);
+        gl.uniform1f(U(p, 'A'), al); gl.uniform1f(U(p, 'K'), ease); gl.uniform1f(U(p, 'W'), Wr); gl.uniform1f(U(p, 'H'), hh); gl.uniform3fv(U(p, 'C1'), th.c1); gl.uniform3fv(U(p, 'C2'), th.c2); gl.uniform3fv(U(p, 'C3'), th.c3); gl.uniform1f(U(p, 'Mx'), th.m); gl.uniform3fv(U(p, 'H1'), hot[0].p); gl.uniform3fv(U(p, 'H2'), hot[1].p); gl.uniform3fv(U(p, 'H3'), hot[2].p);
+        var la = gl.getAttribLocation(p, 'a'), ls = gl.getAttribLocation(p, 's');
+        gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 4, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, sc); gl.enableVertexAttribArray(ls); gl.vertexAttribPointer(ls, 3, gl.FLOAT, false, 0, 0); }
+      setup(PL, lB, lS, 1, 1, th.l); gl.drawArrays(gl.LINES, 0, lineList.length);
+      setup(PP, pB, pS, th.add ? 2.3 : 2.5, th.a, 1.3); gl.drawArrays(gl.POINTS, 0, pts.length);
+      /* signals and the nodes they light up */
+      var live = [];
+      for (var k = sig.length - 1; k >= 0; k--) { var u = sig[k]; u.t += u.s * dt * 60;
+        if (u.t >= 1) { sig.splice(k, 1); fire(u.b, u.g); continue; }
+        var p0 = pts[nodeIx[u.a]], p1 = pts[nodeIx[u.b]]; live.push(lerp(p0[0], p1[0], u.t), lerp(p0[1], p1[1], u.t), lerp(p0[2], p1[2], u.t), 1); }
+      for (k = 0; k < M; k++) { if (ref[k] > 0) ref[k] -= dt * 60; if (glow[k] > .04) { var g = pts[nodeIx[k]]; live.push(g[0], g[1], g[2], glow[k]); glow[k] *= Math.pow(.94, dt * 60); } }
+      if (live.length) { var n = Math.min(600, live.length / 4);
+        gl.bindBuffer(gl.ARRAY_BUFFER, sB); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(live.slice(0, n * 4)), gl.DYNAMIC_DRAW);
+        setup(PP, sB, sS, 7, th.add ? .55 : .4, 2.4); gl.drawArrays(gl.POINTS, 0, n);       /* soft halo */
+        setup(PP, sB, sS, 2.4, 1.3, 1.1); gl.drawArrays(gl.POINTS, 0, n); }                  /* bright core */
+    }
+    function loop(ts) {
+      var dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts; T += dt;
+      if (K < 1) K = Math.min(1, K + dt / 2.4); drift(dt);
+      yaw = 1.5708 + .25 * Math.sin(T * .18); yawT += (tx - yawT) * .05; pitch += (pitchT - pitch) * .05;   /* sways around the side view, where a brain reads best */
+      if (rnd() < dt * 1.6) fire(Math.floor(rnd() * M), 3);           /* small spontaneous activity */
+      if (rnd() < dt * .22) fire(Math.floor(rnd() * M), 0);           /* now and then a wider cascade */
+      draw(dt); if (on) requestAnimationFrame(loop);
+    }
+    var tx = 0;
+    cv.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); tx = ((e.clientX - r.left) / r.width - .5) * .9; pitchT = -.18 + ((e.clientY - r.top) / r.height - .5) * .5; });
+    cv.addEventListener('pointerleave', function () { tx = 0; pitchT = -.18; });
+    cv.addEventListener('pointerdown', function (e) {
+      var r = cv.getBoundingClientRect(), mx = (e.clientX - r.left) / r.width * 2 - 1, my = 1 - (e.clientY - r.top) / r.height * 2, bk = 0, bd = 9; mat();
+      for (var k = 0; k < M; k++) { var p = pts[nodeIx[k]], qx = R[0] * p[0] + R[3] * p[1] + R[6] * p[2], qy = R[1] * p[0] + R[4] * p[1] + R[7] * p[2], qz = R[2] * p[0] + R[5] * p[1] + R[8] * p[2], z = qz + 3.4;
+        var sx = qx * (3.4 / z) * S * Wr, sy = qy * (3.4 / z) * S, dd = (sx - mx) * (sx - mx) + (sy - my) * (sy - my); if (qz < .2 && dd < bd) { bd = dd; bk = k; } }
+      ref[bk] = 0; fire(bk, 0); var hint = $('.bhint'); if (hint) hint.classList.add('off');
+      if (reduce) draw(0);
+    });
+    size(); addEventListener('resize', size);
+    setTimeout(function () { var hint = $('.bhint'); if (hint) hint.classList.add('off'); }, 9000);
+    if (reduce) { draw(0); return; }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { var was = on; on = e.isIntersecting; if (on && !was) { last = 0; requestAnimationFrame(loop); } }); }).observe(cv);
+  })();
 
   /* ---------- lecture visuals and contact light: load and play only while visible ---------- */
   (function () {

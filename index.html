@@ -727,8 +727,8 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     try { localStorage.setItem('theme', next); } catch (e) {}
   });
 
-  /* ---------- live brain: a folded cortex of points, signals that cascade along its connections ---------- */
-  (function () {
+  /* ---------- live brain: points sampled from a real brain mesh (procedural fallback), signals that cascade along its connections ---------- */
+  (async function () {
     var cv = $('#brain'); if (!cv) return;
     var gl = cv.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: false });
     if (!gl) { cv.parentNode.classList.add('nogl'); return; }
@@ -770,12 +770,21 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     }
     function stem() { var t = rnd(), a = 6.2832 * rnd(), r = .085 * (1 - .25 * t); return [Math.cos(a) * r, (-.3 - .5 * t) * .94, (-.24 - .1 * t + Math.sin(a) * r) * 1.1, .35 + .3 * rnd()]; }
 
-    var small = innerWidth < 900, N = small ? 9000 : 15000, pts = [], nodeIx = [];
-    for (var i = 0; i < N; i++) {
-      var r = rnd(), q = r < .87 ? hemi(r < .435 ? -1 : 1) : r < .955 ? cereb() : stem();
-      if (!q) { i--; continue; }
-      pts.push(q); if (r < .955 && i % 9 === 0 && q[3] > .35) nodeIx.push(i);
-    }
+    var small = innerWidth < 900, N = small ? 16000 : 30000, pts = [], nrm = [], nodeIx = [], mesh = 0, i;
+    try {                                                     /* 10 bytes per point: int16 xyz, int8 normal, uint8 sulcal brightness */
+      var bin = await (await fetch('assets/brain-points.bin')).arrayBuffer(), dv = new DataView(bin), n0 = Math.min(N, Math.floor(bin.byteLength / 10)), Q = 1.2 / 32767;
+      for (i = 0; i < n0; i++) { var o = i * 10, br = dv.getUint8(o + 9) / 255;
+        pts.push([dv.getInt16(o, true) * Q, dv.getInt16(o + 2, true) * Q, dv.getInt16(o + 4, true) * Q, .2 + .8 * br]);
+        nrm.push(dv.getInt8(o + 6) / 127, dv.getInt8(o + 7) / 127, dv.getInt8(o + 8) / 127);
+        if (i % (small ? 11 : 19) === 0 && br > .45) nodeIx.push(i); }
+      mesh = n0 > 1000 ? 1 : 0;
+    } catch (e) { mesh = 0; }
+    if (!mesh) { pts = []; nrm = []; nodeIx = [];
+      for (i = 0; i < N; i++) {
+        var r = rnd(), q = r < .87 ? hemi(r < .435 ? -1 : 1) : r < .955 ? cereb() : stem();
+        if (!q) { i--; continue; }
+        pts.push(q); nrm.push(0, 0, 0); if (r < .955 && i % 9 === 0 && q[3] > .35) nodeIx.push(i);
+      } }
     /* connections: each node links to its nearest neighbours */
     var M = nodeIx.length, adj = [], lines = [];
     for (var a = 0; a < M; a++) adj.push([]);
@@ -792,8 +801,8 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     var P = arr(pts), lineList = []; for (i = 0; i < lines.length; i++) lineList.push(pts[nodeIx[lines[i]]]);
     var Lb = arr(lineList, .5);
     function buf(data) { var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); return b; }
-    var pB = buf(P[0]), pS = buf(P[1]), lB = buf(Lb[0]), lS = buf(Lb[1]), sB = gl.createBuffer(), sS = buf(new Float32Array(600 * 3));
-    var VS = 'attribute vec4 a;attribute vec3 s;uniform mat3 R;uniform float S,D,T,Pz,A,K,W;uniform vec3 H1,H2,H3;varying float v,hb;void main(){vec3 p=mix(s,a.xyz,K);vec3 q=R*p;float z=q.z+3.4;vec2 xy=q.xy*(3.4/z)*S;gl_Position=vec4(xy.x*W,xy.y,0.,1.);float w=.5+.5*sin(p.z*5.5-T*1.4+p.y*2.5);float dep=smoothstep(.9,-.7,q.z);vec3 nq=R*normalize(p-vec3(sign(p.x)*.22,.06,0.));float face=smoothstep(-.2,.55,-nq.z);float rim=pow(1.-abs(nq.z),2.);vec3 d1=p-H1,d2=p-H2,d3=p-H3;hb=clamp(exp(-dot(d1,d1)*22.)+exp(-dot(d2,d2)*22.)+exp(-dot(d3,d3)*22.),0.,1.);v=(.18+.82*a.w)*(.68+.32*w)*mix(.16,1.,dep*dep)*mix(.3,1.,face)*(.78+.7*rim*face)*(1.+.8*hb)*A;gl_PointSize=Pz*D*(1.3+1.5*a.w)*(1.+.35*hb)*(3.4/z);}';
+    var pB = buf(P[0]), pS = buf(P[1]), pN = buf(new Float32Array(nrm)), lB = buf(Lb[0]), lS = buf(Lb[1]), sB = gl.createBuffer(), sS = buf(new Float32Array(600 * 3));
+    var VS = 'attribute vec4 a;attribute vec3 s,n;uniform mat3 R;uniform float S,D,T,Pz,A,K,W,UN;uniform vec3 H1,H2,H3;varying float v,hb;void main(){vec3 p=mix(s,a.xyz,K);vec3 q=R*p;float z=q.z+3.4;vec2 xy=q.xy*(3.4/z)*S;gl_Position=vec4(xy.x*W,xy.y,0.,1.);float w=.5+.5*sin(p.z*5.5-T*1.4+p.y*2.5);float dep=smoothstep(.9,-.7,q.z);vec3 nn=UN>.5?n:normalize(p-vec3(sign(p.x)*.22,.06,0.));vec3 nq=R*nn;float face=smoothstep(-.2,.55,-nq.z);float lam=max(dot(nq,normalize(vec3(-.38,.55,-.74))),0.);float rim=pow(1.-abs(nq.z),2.);vec3 d1=p-H1,d2=p-H2,d3=p-H3;hb=clamp(exp(-dot(d1,d1)*22.)+exp(-dot(d2,d2)*22.)+exp(-dot(d3,d3)*22.),0.,1.);v=(.18+.82*a.w)*(.68+.32*w)*mix(.16,1.,dep*dep)*mix(.3,1.,face)*(.78+.7*rim*face)*(1.+.8*hb)*mix(1.,.28+.95*lam,UN)*A;gl_PointSize=Pz*D*(1.3+1.5*a.w)*(1.+.35*hb)*(3.4/z);}';
     var FSP = 'precision mediump float;varying float v,hb;uniform vec3 C1,C2,C3;uniform float H,Mx;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;float al=pow(smoothstep(.5,0.,d),H);gl_FragColor=vec4(mix(mix(C1,C2,clamp(v*Mx,0.,1.)),C3,hb*.7),clamp(al*v,0.,1.));}';
     var FSL = 'precision mediump float;varying float v,hb;uniform vec3 C1,C2;uniform float H;void main(){gl_FragColor=vec4(mix(C1,C2,.55),v*H);}';
     function prog(fs) { var p = gl.createProgram(); [[gl.VERTEX_SHADER, VS], [gl.FRAGMENT_SHADER, fs]].forEach(function (x) { var sh = gl.createShader(x[0]); gl.shaderSource(sh, x[1]); gl.compileShader(sh); gl.attachShader(p, sh); }); gl.linkProgram(p); return p; }
@@ -820,14 +829,15 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
       var th = theme(); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.enable(gl.BLEND);
       gl.blendFunc(gl.SRC_ALPHA, th.add ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); mat();
       var ease = 1 - Math.pow(1 - K, 3);
-      function setup(p, b, sc, pz, al, hh) { gl.useProgram(p);
+      function setup(p, b, sc, pz, al, hh, nb) { gl.useProgram(p); gl.uniform1f(U(p, 'UN'), nb && mesh ? 1 : 0);
         gl.uniformMatrix3fv(U(p, 'R'), false, R); gl.uniform1f(U(p, 'S'), S); gl.uniform1f(U(p, 'D'), D); gl.uniform1f(U(p, 'T'), T); gl.uniform1f(U(p, 'Pz'), pz);
         gl.uniform1f(U(p, 'A'), al); gl.uniform1f(U(p, 'K'), ease); gl.uniform1f(U(p, 'W'), Wr); gl.uniform1f(U(p, 'H'), hh); gl.uniform3fv(U(p, 'C1'), th.c1); gl.uniform3fv(U(p, 'C2'), th.c2); gl.uniform3fv(U(p, 'C3'), th.c3); gl.uniform1f(U(p, 'Mx'), th.m); gl.uniform3fv(U(p, 'H1'), hot[0].p); gl.uniform3fv(U(p, 'H2'), hot[1].p); gl.uniform3fv(U(p, 'H3'), hot[2].p);
         var la = gl.getAttribLocation(p, 'a'), ls = gl.getAttribLocation(p, 's');
         gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 4, gl.FLOAT, false, 0, 0);
-        gl.bindBuffer(gl.ARRAY_BUFFER, sc); gl.enableVertexAttribArray(ls); gl.vertexAttribPointer(ls, 3, gl.FLOAT, false, 0, 0); }
+        gl.bindBuffer(gl.ARRAY_BUFFER, sc); gl.enableVertexAttribArray(ls); gl.vertexAttribPointer(ls, 3, gl.FLOAT, false, 0, 0);
+        var ln = gl.getAttribLocation(p, 'n'); if (ln >= 0) { if (nb) { gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.enableVertexAttribArray(ln); gl.vertexAttribPointer(ln, 3, gl.FLOAT, false, 0, 0); } else { gl.disableVertexAttribArray(ln); gl.vertexAttrib3f(ln, 0, 0, 1); } } }
       setup(PL, lB, lS, 1, 1, th.l); gl.drawArrays(gl.LINES, 0, lineList.length);
-      setup(PP, pB, pS, th.add ? 2.3 : 2.5, th.a, 1.3); gl.drawArrays(gl.POINTS, 0, pts.length);
+      setup(PP, pB, pS, mesh ? (th.add ? 1.55 : 1.7) : (th.add ? 2.3 : 2.5), th.a, 1.3, pN); gl.drawArrays(gl.POINTS, 0, pts.length);
       /* signals and the nodes they light up */
       var live = [];
       for (var k = sig.length - 1; k >= 0; k--) { var u = sig[k]; u.t += u.s * dt * 60;

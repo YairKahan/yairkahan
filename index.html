@@ -326,7 +326,7 @@ html[data-theme="dark"] .hamb{opacity:.06}
 .brain3d{position:relative;width:min(600px,100%);aspect-ratio:1/1;margin:0}
 .brain3d::before{content:"";position:absolute;inset:8%;border-radius:50%;background:none;pointer-events:none}
 html[data-theme="dark"] .brain3d::before{background:radial-gradient(circle,rgba(54,116,170,.22),rgba(54,116,170,0) 66%)}
-.brain3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:pan-y;opacity:0;transition:opacity 1.6s ease;
+.brain3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:pan-y;opacity:0;transition:opacity .6s ease;
   -webkit-mask-image:radial-gradient(ellipse 50% 45% at 49% 50%,#000 64%,transparent 100%),radial-gradient(ellipse 43% 50% at 55% 46%,#000 58%,transparent 100%);-webkit-mask-composite:source-over;
   mask-image:radial-gradient(ellipse 50% 45% at 49% 50%,#000 64%,transparent 100%),radial-gradient(ellipse 43% 50% at 55% 46%,#000 58%,transparent 100%);mask-composite:add}
 .brain3d canvas.on{opacity:1}
@@ -356,6 +356,8 @@ html[data-theme="dark"] .caust{opacity:.1}
 html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,230,.09),rgba(142,193,230,0) 62%);mix-blend-mode:screen}
 @media (prefers-reduced-motion:reduce),(hover:none){.glowc{display:none}}
 </style>
+<link rel="preload" href="assets/brain-points-m.bin" as="fetch" type="application/octet-stream" crossorigin="anonymous" media="(max-width: 899px)">
+<link rel="preload" href="assets/brain-points.bin" as="fetch" type="application/octet-stream" crossorigin="anonymous" media="(min-width: 900px)">
 </head>
 <body>
 <a class="skip" href="#lectures">דלגו להרצאות</a>
@@ -773,9 +775,9 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     }
     function stem() { var t = rnd(), a = 6.2832 * rnd(), r = .085 * (1 - .25 * t); return [Math.cos(a) * r, (-.3 - .5 * t) * .94, (-.24 - .1 * t + Math.sin(a) * r) * 1.1, .35 + .3 * rnd()]; }
 
-    var small = innerWidth < 900, N = small ? 16000 : 30000, pts = [], nrm = [], nodeIx = [], mesh = 0, i;
+    var small = innerWidth < 900, N = small ? 14000 : 26000, pts = [], nrm = [], nodeIx = [], mesh = 0, i;
     try {                                                     /* 10 bytes per point: int16 xyz, int8 normal, uint8 sulcal brightness */
-      var bin = await (await fetch('assets/brain-points.bin')).arrayBuffer(), dv = new DataView(bin), n0 = Math.min(N, Math.floor(bin.byteLength / 10)), Q = 1.2 / 32767;
+      var bin = await (await fetch(small ? 'assets/brain-points-m.bin' : 'assets/brain-points.bin')).arrayBuffer(), dv = new DataView(bin), n0 = Math.min(N, Math.floor(bin.byteLength / 10)), Q = 1.2 / 32767;
       for (i = 0; i < n0; i++) { var o = i * 10, br = dv.getUint8(o + 9) / 255;
         pts.push([dv.getInt16(o, true) * Q, dv.getInt16(o + 2, true) * Q, dv.getInt16(o + 4, true) * Q, .2 + .8 * br]);
         nrm.push(dv.getInt8(o + 6) / 127, dv.getInt8(o + 7) / 127, dv.getInt8(o + 8) / 127);
@@ -854,7 +856,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     }
     function loop(ts) {
       var dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts; T += dt;
-      if (K < 1) K = Math.min(1, K + dt / 2.4); drift(dt);
+      if (K < 1) K = Math.min(1, K + dt / 1.05); drift(dt);
       yaw = 1.5708 + .25 * Math.sin(T * .18); yawT += (tx - yawT) * .05; pitch += (pitchT - pitch) * .05;   /* sways around the side view, where a brain reads best */
       if (rnd() < dt * 1.6) fire(Math.floor(rnd() * M), 3);           /* small spontaneous activity */
       if (rnd() < dt * .22) fire(Math.floor(rnd() * M), 0);           /* now and then a wider cascade */

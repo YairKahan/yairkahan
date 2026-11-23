@@ -30,7 +30,7 @@
 <script>try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
 {"@type":"Person","@id":"https://yairkahan.github.io/yairkahan/#me","name":"יאיר כהאן","alternateName":"Yair Kahan","url":"https://yairkahan.github.io/yairkahan/","image":"https://yairkahan.github.io/yairkahan/og.jpg","jobTitle":"מרצה","alumniOf":{"@type":"CollegeOrUniversity","name":"אוניברסיטת בן גוריון בנגב"},"affiliation":{"@type":"CollegeOrUniversity","name":"האוניברסיטה העברית בירושלים"},"knowsAbout":["מדעי המוח","פסיכולוגיה"],"sameAs":["https://www.instagram.com/yair.kahan/"],"telephone":"+972548360550"},
-{"@type":"Service","name":"הרצאות העשרה במדעי המוח","serviceType":"הרצאת העשרה","provider":{"@id":"https://yairkahan.github.io/yairkahan/#me"},"areaServed":{"@type":"Country","name":"ישראל"},"audience":{"@type":"Audience","audienceType":"בתי ספר, מכינות, יחידות צבאיות וארגונים"},"description":"הרצאות העשרה מבוססות מחקר על איך המוח שלנו עובד. לא טיפול ולא אבחון."}]}</script>
+{"@type":"Service","name":"הרצאות העשרה במדעי המוח","serviceType":"הרצאת העשרה","provider":{"@id":"https://yairkahan.github.io/yairkahan/#me"},"areaServed":{"@type":"Country","name":"ישראל"},"audience":{"@type":"Audience","audienceType":"קבוצות הורים, בתי ספר, מכינות, יחידות צבאיות וארגונים"},"description":"הרצאות העשרה מבוססות מחקר על איך המוח שלנו עובד. לא טיפול ולא אבחון."}]}</script>
 <style>
 /* v9: bone paper, ink and one brass accent, with a live network in the hero, an engraved brain plate,
    an EEG trace as scroll progress, an audience switch, a lecture matcher and circular wipes between states. */
@@ -99,6 +99,12 @@ html[data-theme="dark"] .icon-btn .moon,html[data-theme="light"] .icon-btn .sun{
 @keyframes bdraw{to{stroke-dashoffset:0}}
 .sub{font-size:clamp(17px,1.5vw,20px);color:var(--ink2);max-width:34em}
 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.feat{display:flex;align-items:center;gap:14px;margin-top:18px;padding:10px 14px 10px 16px;max-width:440px;border:1px solid var(--line2);border-radius:18px;background:var(--card);color:inherit;text-decoration:none;transition:transform .25s,box-shadow .25s,border-color .25s}
+.feat img{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none}
+.feat small{display:block;font-size:13px;font-weight:600;color:var(--sig)}
+.feat b{display:block;font-size:16px;font-weight:600;line-height:1.3}
+.feat svg{width:20px;height:20px;flex:none;margin-inline-start:auto;fill:none;stroke:var(--sig);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover){.feat:hover{transform:translateY(-2px);border-color:var(--sig);box-shadow:0 16px 34px -22px rgba(59,125,181,.5)}}
 .lens{position:relative;justify-self:center;width:min(360px,100%);aspect-ratio:4/5;border-radius:28px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 30px 60px -34px rgba(31,42,46,.45),0 0 0 8px var(--soft);margin:0}
 .lens video{width:100%;height:100%;object-fit:cover}
 .lens::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.55));z-index:1;pointer-events:none}
@@ -333,12 +339,18 @@ html[data-theme="dark"] .brain3d::before{background:radial-gradient(circle,rgba(
 .bhint{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);white-space:nowrap;font-size:13px;color:var(--muted);transition:opacity 1s;pointer-events:none}
 .bhint.off{opacity:0}
 .brain3d.nogl{display:none}
-.hvis .lens{position:absolute;right:-2%;bottom:-12%;width:min(170px,30%);border-radius:20px;z-index:3}
+.hvis .lenses{position:absolute;right:-2%;bottom:-12%;z-index:3;display:flex;align-items:flex-end;gap:14px;width:min(400px,70%)}
+.hvis .lens{flex:1 1 0;width:auto;border-radius:20px}
+.hvis .lens2{margin-bottom:28px}
+.lens2::before{display:none}
+.lens2 .rec{white-space:nowrap;font-size:12px;padding:5px 10px;gap:6px;top:10px;right:10px}
 @media(min-width:901px){.brain3d{width:min(660px,122%);margin:0 -11%}}
 @media(max-width:900px){
   .hvis{display:contents}
   .brain3d{order:-1;width:min(400px,96%);justify-self:center;margin:-34px auto -26px}
-  .hvis .lens{position:relative;left:auto;bottom:auto;order:1;width:min(300px,78%);border-radius:28px}
+  .hvis .lenses{position:relative;right:auto;bottom:auto;order:1;width:min(440px,94%);justify-self:center;gap:12px}
+  .hvis .lens{border-radius:22px}
+  .hvis .lens2{margin-bottom:0}
 }
 /* ---------- about: research visual ---------- */
 .amedia{position:relative;margin:0 0 12px;aspect-ratio:2/1;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#FAF7F6}
@@ -392,15 +404,22 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         <a class="btn btn-sig" href="#lectures">לרשימת ההרצאות</a>
         <a class="btn btn-ghost" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%0A%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20...%20%28%D7%9E%D7%99%20%D7%94%D7%9D%29%2C%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%0A%D7%9E%D7%94%20%D7%9E%D7%A2%D7%A1%D7%99%D7%A7%20%D7%90%D7%95%D7%AA%D7%9D%20%D7%A2%D7%9B%D7%A9%D7%99%D7%95%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%2C%20%D7%90%D7%9D%20%D7%99%D7%A9%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>או לשאול שאלה בוואטסאפ</a>
       </div>
+      <a class="feat" href="#lec-parents"><img src="assets/lec-parents.jpg" alt="" width="56" height="56" loading="lazy"><span><small>הורים · ועדי הורים</small><b>להורים: המוח המתבגר בעידן המסכים וה AI</b></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
     </div>
     <div class="hvis">
       <figure class="brain3d" aria-hidden="true"><canvas id="brain"></canvas><span class="bhint">אפשר לגעת במוח</span></figure>
+    <div class="lenses">
     <figure class="lens">
         <video id="heroVid" muted loop playsinline preload="none" poster="assets/hero-poster.jpg" data-src="assets/hero.mp4" aria-label="יאיר כהאן מרצה מול קהל"></video>
         <span class="scan" aria-hidden="true"></span>
         <figcaption class="rec"><i aria-hidden="true"></i>מתוך הרצאה</figcaption>
         <button class="vp" id="vp" type="button" aria-pressed="false" aria-label="עצירת הסרטון"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="ps" d="M3 2 V8 M7 2 V8"/><path class="pl" d="M3 1.8 L8.4 5 L3 8.2 Z"/></svg></button>
       </figure>
+      <figure class="lens lens2">
+        <video muted loop playsinline preload="none" poster="assets/hero-parents.jpg" data-src="assets/hero-parents.mp4" aria-label="קטע מתוך ההרצאה להורים, עם כתוביות"></video>
+        <figcaption class="rec"><i aria-hidden="true"></i>ההרצאה להורים</figcaption>
+      </figure>
+    </div>
     </div>
   </div>
 </section>
@@ -411,6 +430,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
       <h2 id="tuneH">למי ההרצאה?</h2>
       <div class="seg" role="radiogroup" aria-labelledby="tuneH">
         <label><input type="radio" name="aud" value="" checked><span>כולם</span></label>
+        <label><input type="radio" name="aud" value="parents"><span>הורים</span></label>
         <label><input type="radio" name="aud" value="school"><span>בית ספר</span></label>
         <label><input type="radio" name="aud" value="mechina"><span>מכינה</span></label>
         <label><input type="radio" name="aud" value="unit"><span>יחידה צבאית</span></label>
@@ -434,7 +454,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     <p class="lead rv">כל הרצאה נמשכת 45&nbsp;עד&nbsp;90 דקות.</p>
     <div class="lecs">
 
-            <article class="lec rv" id="lec-parents" data-i="1" data-aud="school" data-title="להורים: המוח המתבגר בעידן המסכים וה AI" data-need="הילדים לא עוזבים את המסך, ורוצים להבין מה קורה להם במוח">
+            <article class="lec rv" id="lec-parents" data-i="1" data-aud="parents school" data-title="להורים: המוח המתבגר בעידן המסכים וה AI" data-need="הילדים לא עוזבים את המסך, ורוצים להבין מה קורה להם במוח">
         <div class="lmedia" aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lec-parents.jpg" data-src="assets/lec-parents.mp4"></video></div>
         <h3><button class="head" type="button" aria-expanded="false" aria-controls="lec-parents-b">
           <span class="ix" aria-hidden="true">01</span>
@@ -444,7 +464,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         <div class="body" id="lec-parents-b" hidden>
           <div>
             <h4 class="k">על מה מדברים</h4>
-            <ul><li><b>למה הם לא עוזבים את המסך?</b> המפגש בין מוח מתבגר לסרטונים, לייקים ושייכות חברתית.</li><li><b>AI כמורה, לא כקיצור דרך:</b> איך משתמשים בצ'אט כדי לפתח חשיבה, לא להחליף אותה.</li><li><b>מצפייה ליצירה:</b> איך אפשר ללמד את הילד שלכם להיעזר בטלפון כדי לבנות וליצור.</li></ul>
+            <ul><li><b>למה הם לא עוזבים את המסך?</b> מה שמעניין נערים בכל דור זה שייכות חברתית. היום המשחק של השייכות החברתית נמצא 24/7, והוא לא מתחיל ולא נגמר אף פעם.</li><li><b>המחיר של טעות:</b> כולנו עשינו שטויות בתור נערים. היום כל דבר מצולם, והמחיר של הטעות היום זה לא המחיר שהיה פעם.</li><li><b>הוא לא רואה תהליך:</b> הוא רואה בפלאפון שלו אנשים מרוסקים ואנשים שבטופ. מה שחסר מאוד לילדים היום זה מרחב שבו מותר לטעות.</li><li><b>מציאות שהולכת ומשתנה:</b> לא להכין אותם למשהו ספציפי, להכין אותם להיות גמישים, להיות אנשים שמפתחים את עצמם.</li></ul>
             <div class="brain"><h4 class="k">מה קורה במוח</h4><p>אצל בני נוער, החלק במוח שרוצה עוד כבר פועל בכל הכוח, והבלמים עדיין נבנים.</p></div>
             <p class="fmt">מתאים לערב הורים או למפגש של ועד ההורים.</p>
             <a class="btn btn-sig btn-sm go" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%20%28%D7%91%D7%99%D7%AA%20%D7%A1%D7%A4%D7%A8%20%D7%90%D7%95%20%D7%95%D7%A2%D7%93%20%D7%94%D7%95%D7%A8%D7%99%D7%9D%29%0A%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%A0%D7%99%D7%9D%20%D7%91%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%22%D7%9C%D7%94%D7%95%D7%A8%D7%99%D7%9D%3A%20%D7%94%D7%9E%D7%95%D7%97%20%D7%94%D7%9E%D7%AA%D7%91%D7%92%D7%A8%20%D7%91%D7%A2%D7%99%D7%93%D7%9F%20%D7%94%D7%9E%D7%A1%D7%9B%D7%99%D7%9D%20%D7%95%D7%94%20AI%22%0A%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20%D7%9B...%20%D7%94%D7%95%D7%A8%D7%99%D7%9D%0A%D7%9E%D7%94%20%D7%94%D7%99%D7%99%D7%A0%D7%95%20%D7%A8%D7%95%D7%A6%D7%99%D7%9D%20%D7%A9%D7%99%D7%99%D7%A9%D7%90%D7%A8%20%D7%9C%D7%94%D7%9D%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לבדוק תאריך בוואטסאפ</a>
@@ -542,6 +562,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
       <div>
         <p class="q" id="q1">מי הקבוצה?</p>
         <div class="seg" role="radiogroup" aria-labelledby="q1">
+          <label><input type="radio" name="aud2" value="parents"><span>הורים</span></label>
           <label><input type="radio" name="aud2" value="school"><span>בית ספר</span></label>
           <label><input type="radio" name="aud2" value="mechina"><span>מכינה</span></label>
           <label><input type="radio" name="aud2" value="unit"><span>יחידה צבאית</span></label>
@@ -636,6 +657,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
         <h3>רוצים הצעה מדויקת?</h3>
         <fieldset class="fs" id="f-type"><legend>סוג המסגרת</legend>
           <div class="seg">
+            <label><input type="radio" name="type" value="הורים"><span>הורים</span></label>
             <label><input type="radio" name="type" value="בית ספר"><span>בית ספר</span></label>
             <label><input type="radio" name="type" value="מכינה"><span>מכינה</span></label>
             <label><input type="radio" name="type" value="יחידה צבאית"><span>יחידה צבאית</span></label>
@@ -880,7 +902,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
 
   /* ---------- lecture visuals and contact light: load and play only while visible ---------- */
   (function () {
-    var vids = document.querySelectorAll('.lmedia video, .caust video, .amedia video, .hamb video'), narrow = matchMedia('(max-width: 700px)').matches; if (!vids.length || reduce || !('IntersectionObserver' in window)) return;
+    var vids = document.querySelectorAll('.lmedia video, .caust video, .amedia video, .hamb video, .lens2 video'), narrow = matchMedia('(max-width: 700px)').matches; if (!vids.length || reduce || !('IntersectionObserver' in window)) return;
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) {
       var v = e.target;
       if (e.isIntersecting) { if (!v.getAttribute('src')) { v.src = (narrow && v.dataset.srcM) || v.dataset.src; v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true }); } var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
@@ -958,12 +980,13 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
       wave(function () {
         root.style.scrollBehavior = 'auto'; t.scrollIntoView({ block: 'start' }); root.style.scrollBehavior = '';
         history.replaceState(null, '', '#' + id);
+        if (t.classList.contains('lec')) { t.classList.add('in'); openLec(t); }
       });
     });
   });
 
   /* ---------- audience tuning ---------- */
-  var AUD = { school: 'בית ספר', mechina: 'מכינה', unit: 'יחידה צבאית', org: 'ארגון' }, aud = '';
+  var AUD = { parents: 'הורים', school: 'בית ספר', mechina: 'מכינה', unit: 'יחידה צבאית', org: 'ארגון' }, aud = '';
   var form = $('#contactForm'), lecSel = $('#f-lec');
   function applyAud(v) {
     aud = v; if (v) root.dataset.aud = v; else root.removeAttribute('data-aud');
@@ -978,6 +1001,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     $$('input[name="aud"], input[name="aud2"]').forEach(function (r) { r.checked = r.value === v; });
     var t = v && form.querySelector('input[name="type"][value="' + AUD[v] + '"]');
     if (t) { t.checked = true; filterLectures(); }
+    if (v === 'parents') lecSel.value = 'להורים: המוח המתבגר בעידן המסכים וה AI';
     recolor(); preview(); compose(false);
   }
   $$('input[name="aud"], input[name="aud2"]').forEach(function (r) {
@@ -1026,7 +1050,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
   function g(id) { return document.getElementById(id).value.trim(); }
   function chip(n) { var c = form.querySelector('input[name="' + n + '"]:checked'); return c ? c.value : ''; }
   function filterLectures() {
-    var t = chip('type'), a = t === 'ארגון' ? 'org' : (t === 'בית ספר' || t === 'מכינה' || t === 'יחידה צבאית') ? 'edu' : '';
+    var t = chip('type'), a = t === 'ארגון' ? 'org' : (t === 'הורים' || t === 'בית ספר' || t === 'מכינה' || t === 'יחידה צבאית') ? 'edu' : '';
     [].slice.call(lecSel.options).forEach(function (o) { var x = o.getAttribute('data-aud'); o.hidden = !!(a && x && x !== a); o.disabled = o.hidden; });
     if (lecSel.selectedOptions[0] && lecSel.selectedOptions[0].disabled) lecSel.value = '';
   }

@@ -119,9 +119,6 @@ html[data-theme="dark"] .icon-btn .moon,html[data-theme="light"] .icon-btn .sun{
 .vp[aria-pressed="true"] .ps,.vp[aria-pressed="false"] .pl{display:none}
 
 .tune{position:relative;z-index:3;margin-top:-46px}
-.tune .box{display:grid;grid-template-columns:auto 1fr;gap:10px 26px;align-items:center;padding:18px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
-.tune h2{font-size:16px;font-weight:600}
-.tune small{grid-column:1/-1;color:var(--muted);font-size:14px}
 .seg{display:flex;flex-wrap:wrap;gap:8px}
 .seg label{position:relative}
 .seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
@@ -259,7 +256,9 @@ h2.t{font-family:var(--serif);font-size:clamp(32px,4.6vw,58px);font-weight:500;l
 .faq details[open] p{animation:fadeup .5s var(--ease)}
 @keyframes fadeup{from{opacity:0;transform:translateY(8px)}}
 
-.contact-g{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:start}
+.me{width:min(260px,64%);aspect-ratio:1/1;margin:0 0 22px;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#DCE4EC;box-shadow:0 18px 40px -24px rgba(20,32,48,.35)}
+.me img{display:block;width:100%;height:100%;object-fit:cover}
+.contact-g{display:grid;grid-template-columns:1fr;max-width:680px;gap:30px;align-items:start}
 .ways{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
 form{display:grid;gap:14px;padding:22px;border:1px solid var(--line);border-radius:24px;background:var(--card)}
 form h3{font-family:var(--serif);font-weight:500;font-size:24px}
@@ -407,7 +406,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
       <a class="feat" href="#lec-parents"><img src="assets/lec-parents.jpg" alt="" width="56" height="56" loading="lazy"><span><small>הורים · ועדי הורים</small><b>להורים: המוח המתבגר בעידן המסכים וה AI</b></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
     </div>
     <div class="hvis">
-      <figure class="brain3d" aria-hidden="true"><canvas id="brain"></canvas><span class="bhint">אפשר לגעת במוח</span></figure>
+      <figure class="brain3d" aria-hidden="true"><canvas id="brain"></canvas></figure>
     <div class="lenses">
     <figure class="lens">
         <video id="heroVid" muted loop playsinline preload="none" poster="assets/hero-poster.jpg" data-src="assets/hero.mp4" aria-label="יאיר כהאן מרצה מול קהל"></video>
@@ -426,18 +425,6 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
 
 <div class="tune">
   <div class="wrap">
-    <div class="box rv">
-      <h2 id="tuneH">למי ההרצאה?</h2>
-      <div class="seg" role="radiogroup" aria-labelledby="tuneH">
-        <label><input type="radio" name="aud" value="" checked><span>כולם</span></label>
-        <label><input type="radio" name="aud" value="parents"><span>הורים</span></label>
-        <label><input type="radio" name="aud" value="school"><span>בית ספר</span></label>
-        <label><input type="radio" name="aud" value="mechina"><span>מכינה</span></label>
-        <label><input type="radio" name="aud" value="unit"><span>יחידה צבאית</span></label>
-        <label><input type="radio" name="aud" value="org"><span>ארגון</span></label>
-      </div>
-      <small>בחרו, והעמוד יסתדר לפיכם: ההרצאות שמתאימות יעלו למעלה, והטופס יתמלא לבד.</small>
-    </div>
     <div class="nums">
       <p class="num rv"><b><bdi dir="ltr"><span data-count="20">20</span>+</bdi></b><span>הרצאות</span></p>
       <p class="num rv"><b><bdi dir="ltr"><span data-count="500">500</span>+</bdi></b><span>משתתפים</span></p>
@@ -601,6 +588,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     <span class="sec-n rv" aria-hidden="true">03</span>
     <div class="about-g">
       <div>
+        <figure class="me rv"><img src="assets/yair.jpg" alt="יאיר כהאן" width="720" height="720" loading="lazy" decoding="async"></figure>
         <h2 class="t rv">נעים להכיר, אני יאיר</h2>
         <p class="rv">אני בוגר תואר ראשון במדעי המוח. ביומיום אני חוקר במעבדה איך המוח מעדכן ציפיות, ובמילואים אני קצין קרבי.</p>
         <p class="rv">בהרצאות אני הכי אוהב את השאלות. כשמישהו מרים יד ושואל "רגע, אז למה זה קורה לי?", אני יודע שההרצאה עבדה.</p>
@@ -647,49 +635,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
           <a class="btn btn-wa" href="https://wa.me/972548360550?text=%D7%94%D7%99%D7%99%20%D7%99%D7%90%D7%99%D7%A8%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%0A%D7%A9%D7%9E%D7%99%20...%2C%20%D7%AA%D7%A4%D7%A7%D7%99%D7%93%3A%20...%2C%20%D7%9E...%0A%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%94%3A%20...%20%28%D7%9E%D7%99%20%D7%94%D7%9D%29%2C%20%D7%9B...%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%99%D7%9D%0A%D7%9E%D7%94%20%D7%9E%D7%A2%D7%A1%D7%99%D7%A7%20%D7%90%D7%95%D7%AA%D7%9D%20%D7%A2%D7%9B%D7%A9%D7%99%D7%95%3A%20...%0A%D7%9E%D7%95%D7%A2%D7%93%20%D7%9E%D7%A9%D7%95%D7%A2%D7%A8%2C%20%D7%90%D7%9D%20%D7%99%D7%A9%3A%20..." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>לכתוב בוואטסאפ</a>
           <a class="btn btn-ghost" href="tel:+972548360550" aria-label="להתקשר ל 054 836 0550"><bdi>054&nbsp;836&nbsp;0550</bdi></a>
         </div>
-        <div class="phone live rv">
-          <div class="ph-h"><i aria-hidden="true"></i>כך תיראה ההודעה שלכם</div>
-          <div class="bubble" id="cBubble"></div>
-          <p class="note">ההודעה מתעדכנת בזמן שאתם ממלאים את הטופס.</p>
-        </div>
       </div>
-      <form id="contactForm" class="rv" novalidate>
-        <h3>רוצים הצעה מדויקת?</h3>
-        <fieldset class="fs" id="f-type"><legend>סוג המסגרת</legend>
-          <div class="seg">
-            <label><input type="radio" name="type" value="הורים"><span>הורים</span></label>
-            <label><input type="radio" name="type" value="בית ספר"><span>בית ספר</span></label>
-            <label><input type="radio" name="type" value="מכינה"><span>מכינה</span></label>
-            <label><input type="radio" name="type" value="יחידה צבאית"><span>יחידה צבאית</span></label>
-            <label><input type="radio" name="type" value="ארגון"><span>ארגון</span></label>
-            <label><input type="radio" name="type" value="אחר"><span>אחר</span></label>
-          </div>
-        </fieldset>
-        <div class="fld"><label for="f-lec">איזו הרצאה</label>
-          <select id="f-lec">
-            <option value="">עוד לא החלטתי</option>
-<option data-aud="edu" value="להורים: המוח המתבגר בעידן המסכים וה AI">להורים: המוח המתבגר בעידן המסכים וה AI</option>
-            <option data-aud="edu" value="מסכים והמוח המתבגר">מסכים והמוח המתבגר: בין התפתחות לניוון</option>
-            <option data-aud="org" value="פרפקציוניזם">פרפקציוניזם: כשטעות קטנה מרגישה כמו סכנה</option>
-                        <option value="ציפיות ואכזבות">ציפיות ואכזבות: איך המוח מתעדכן</option>
-          </select>
-        </div>
-        <div class="row2">
-          <div class="fld"><label for="f-name">שם ותפקיד</label><input id="f-name" type="text" autocomplete="name" required></div>
-          <div class="fld"><label for="f-org">שם המסגרת ואזור בארץ</label><input id="f-org" type="text" autocomplete="organization"></div>
-        </div>
-        <fieldset class="fs" id="f-size"><legend>כמה משתתפים</legend>
-          <div class="seg">
-            <label><input type="radio" name="size" value="עד 30"><span>עד 30</span></label>
-            <label><input type="radio" name="size" value="30 עד 100"><span>30 עד 100</span></label>
-            <label><input type="radio" name="size" value="100 עד 300"><span>100 עד 300</span></label>
-            <label><input type="radio" name="size" value="יותר מ 300"><span>יותר מ&nbsp;300</span></label>
-          </div>
-        </fieldset>
-        <div class="fld"><label for="f-msg">מה הייתם רוצים שיישאר לקבוצה? (לא חובה)</label><textarea id="f-msg"></textarea></div>
-        <button class="btn btn-wa" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>שליחה בוואטסאפ</button>
-        <p class="note" id="formNote" aria-live="polite">ההודעה תיפתח בוואטסאפ עם מה שמילאתם, ואפשר לערוך אותה לפני ששולחים.</p>
-      </form>
     </div>
   </div>
 </section>
@@ -987,7 +933,6 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
 
   /* ---------- audience tuning ---------- */
   var AUD = { parents: 'הורים', school: 'בית ספר', mechina: 'מכינה', unit: 'יחידה צבאית', org: 'ארגון' }, aud = '';
-  var form = $('#contactForm'), lecSel = $('#f-lec');
   function applyAud(v) {
     aud = v; if (v) root.dataset.aud = v; else root.removeAttribute('data-aud');
     var cards = lecs.filter(function (c) { return c !== quiet; });
@@ -998,13 +943,10 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     });
     cards.slice().sort(function (a, b) { return (b.classList.contains('match') - a.classList.contains('match')) || (a.dataset.i - b.dataset.i); })
       .forEach(function (c) { list.insertBefore(c, quiet); });
-    $$('input[name="aud"], input[name="aud2"]').forEach(function (r) { r.checked = r.value === v; });
-    var t = v && form.querySelector('input[name="type"][value="' + AUD[v] + '"]');
-    if (t) { t.checked = true; filterLectures(); }
-    if (v === 'parents') lecSel.value = 'להורים: המוח המתבגר בעידן המסכים וה AI';
-    recolor(); preview(); compose(false);
+    $$('input[name="aud2"]').forEach(function (r) { r.checked = r.value === v; });
+    recolor(); compose(false);
   }
-  $$('input[name="aud"], input[name="aud2"]').forEach(function (r) {
+  $$('input[name="aud2"]').forEach(function (r) {
     r.addEventListener('change', function () { var v = r.value; wave(function () { applyAud(v); }); });
   });
 
@@ -1046,37 +988,7 @@ html[data-theme="dark"] .glowc{background:radial-gradient(circle,rgba(142,193,23
     if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { btn.textContent = 'הועתק'; setTimeout(function () { btn.textContent = 'להעתיק'; }, 1600); }).catch(function () {});
   });
 
-  /* ---------- contact form with a live preview ---------- */
-  function g(id) { return document.getElementById(id).value.trim(); }
-  function chip(n) { var c = form.querySelector('input[name="' + n + '"]:checked'); return c ? c.value : ''; }
-  function filterLectures() {
-    var t = chip('type'), a = t === 'ארגון' ? 'org' : (t === 'הורים' || t === 'בית ספר' || t === 'מכינה' || t === 'יחידה צבאית') ? 'edu' : '';
-    [].slice.call(lecSel.options).forEach(function (o) { var x = o.getAttribute('data-aud'); o.hidden = !!(a && x && x !== a); o.disabled = o.hidden; });
-    if (lecSel.selectedOptions[0] && lecSel.selectedOptions[0].disabled) lecSel.value = '';
-  }
-  function message(ph) {
-    var lines = [FIRST, 'שמי ' + (g('f-name') || (ph ? '...' : '')) + (g('f-org') ? ', ' + g('f-org') : ''), 'מסגרת: ' + (chip('type') || (ph ? '...' : '')), 'הרצאה: ' + (lecSel.value || 'עוד לא החלטתי')];
-    if (chip('size')) lines.push('משתתפים: ' + chip('size'));
-    if (g('f-msg')) lines.push('מה נרצה שיישאר: ' + g('f-msg'));
-    return lines.join('\n');
-  }
-  function preview() { $('#cBubble').textContent = message(true); }
-  form.addEventListener('input', preview);
-  form.addEventListener('change', function (e) {
-    if (e.target.name === 'type') { $('#f-type').removeAttribute('aria-invalid'); filterLectures(); }
-    preview();
-  });
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var note = $('#formNote');
-    function fail(el, msg) { el.setAttribute('aria-invalid', 'true'); (el.querySelector('input') || el).focus(); note.textContent = msg; note.className = 'note err'; }
-    if (!chip('type')) return fail($('#f-type'), 'בחרו סוג מסגרת, כדי שאדע איזו הרצאה להציע.');
-    if (!g('f-name')) return fail($('#f-name'), 'כתבו שם ותפקיד, כדי שאדע עם מי אני מדבר.');
-    $('#f-name').removeAttribute('aria-invalid');
-    window.open(waUrl(message(false)), '_blank');
-    note.textContent = 'ההודעה נפתחה בוואטסאפ. אם היא לא נפתחה, אפשר ללחוץ שוב.'; note.className = 'note';
-  });
-  preview(); compose(false);
+  compose(false);
 
   /* ---------- mobile dock hides next to the contact section ---------- */
   new IntersectionObserver(function (es) { es.forEach(function (e) { $('#dock').classList.toggle('hide', e.isIntersecting); }); }, { threshold: .1 }).observe($('#contact'));
